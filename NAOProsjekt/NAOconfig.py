@@ -1,10 +1,12 @@
 import os
 import sys
-sys.path.append('C:\Users\Legendary\Documents\ELVE3610\Prosjekt\pynaoqi-python2.7-2.8.6.23\pynaoqi-python2.7-2.8.6.23-win64-vs2015-20191127_152649\lib')
+PATH = 'path/to/NAO/library'
+sys.path.append(PATH)
 import motion
 from naoqi import *
 #import almath
-IP = "192.168.12.62"
+
+IP = "127.0.0.0"
 PORT = 9559
 if (IP == ""):
   print "IP address not defined, aborting"
