@@ -114,22 +114,21 @@ def ObjectAnalysis(edges, centerPoint):
 
     shape = ''
     if edges == 3:
-        print(shapes[1])
+        #print(shapes[1])
         shape = 'TRE'
     elif edges == 4:
-        print(shapes[0])
+        #print(shapes[0])
         shape = 'FIR'
     elif edges == 6:
-        print(shapes[2])
+        #print(shapes[2])
         shape = 'HEX'
     elif edges == 8:
-        print(shapes[3])
+        #print(shapes[3])
         shape = 'CRC'
-
-    msg = shape + 'X' + xCoor + 'Y' yCoor
+    msg = ''
+    if shape!='':
+        msg = shape + 'X' + xCoor + 'Y' + yCoor
     return msg
-
-
 
 
 
@@ -154,7 +153,8 @@ if __name__ == "__main__":
         imgStack = stackImages(0.8,([imgContour]))
 
         cv2.imshow("Result",imgStack)
-        ObjectAnalysis(figur)
-        #time.sleep(2)
+        msg = ObjectAnalysis(figur, center)
+        print(msg)
+        time.sleep(2)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
