@@ -1,14 +1,15 @@
 # -*- encoding: UTF-8 -*-
 
 import sys
-sys.path.append('C:\Users\Legendary\Documents\ELVE3610\Prosjekt\pynaoqi-python2.7-2.8.6.23\pynaoqi-python2.7-2.8.6.23-win64-vs2015-20191127_152649\lib')
+PATH = "path/to/NAO/library"
+sys.path.append(PATH)
 import naoqi as nao
 from naoqi import ALProxy
 import time
 import argparse
 import NAOconfig
 
-naoIP = "192.168.12.62"
+naoIP = "127.0.0.0"
 port = 9559
 motion = nao.ALProxy("ALMotion", naoIP, port)
 stand = nao.ALProxy("ALRobotPosture", naoIP, port)
