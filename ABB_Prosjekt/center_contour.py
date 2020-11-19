@@ -1,15 +1,11 @@
 import cv2
 import numpy as np
 
-test = 2
-
 frameWidth = 1680    
 frameHight = 1050
 cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
-
-test = 3
 
 def empty(a):
     pass
