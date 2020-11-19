@@ -2,17 +2,23 @@ import cv2
 import numpy as np
 import time
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e98780ed8511f9ef841cc7362e0fb27fd8d32232
 frameWidth = 1680    
 frameHight = 1050
 cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> e98780ed8511f9ef841cc7362e0fb27fd8d32232
 def empty(a):
     pass
 
