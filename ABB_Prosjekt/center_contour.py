@@ -8,6 +8,8 @@ cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
 
+test = 3
+
 def empty(a):
     pass
 
