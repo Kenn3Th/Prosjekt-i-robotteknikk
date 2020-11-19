@@ -11,6 +11,7 @@ msg = ''
 client.connect((host,port)) #Socket oppkobling
 print('Send command til roboten, skriv exit for å avslutte programmet')
 print(client.recv(1024))
+
 while(msg != 'stopp'):
     data = client.recv(1024)
     print("\n"+data.decode(encoding))

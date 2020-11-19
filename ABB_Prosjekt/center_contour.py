@@ -2,23 +2,16 @@ import cv2
 import numpy as np
 import time
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e98780ed8511f9ef841cc7362e0fb27fd8d32232
 frameWidth = 1680    
 frameHight = 1050
 cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
 
-<<<<<<< HEAD
+shape = ["square", "triangle", "hexagon","circle"]
 
 
 
-
-=======
->>>>>>> e98780ed8511f9ef841cc7362e0fb27fd8d32232
 def empty(a):
     pass
 
@@ -69,6 +62,7 @@ def getContours(img,imgContour):
 
     contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     edges = 0
+    center = []
 
     for cnt in contours:
         area = cv2.contourArea(cnt)
@@ -88,9 +82,9 @@ def getContours(img,imgContour):
             cv2.rectangle(imgContour, (x,y), (x + w, y + h), (0,255,0), 5)
             cv2.putText(imgContour, "Points: " + str(len(approx)), (x + w + 20, y + 20), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
             cv2.putText(imgContour, "Area: " + str(int(area)), (x + w + 20, y + 45), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
-            #ObjectAnalysis(len(approx))
             edges = len(approx)
-    return edges
+            center = (cX,cY)
+    return edges,center
 
 def ObjectAnalysis(edges):
     if edges == 3:
@@ -99,6 +93,8 @@ def ObjectAnalysis(edges):
         print(shape[0])
     elif edges == 6:
         print(shape[2])
+    elif edges == 8:
+        print(shape[3])
 
 
 
@@ -118,13 +114,14 @@ if __name__ == "__main__":
         imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
         kernel = np.ones((5,5))
         imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
-        figur = getContours(imgDil,imgContour)
+        figur,center = getContours(imgDil,imgContour)
+        print(center)
         
 
         imgStack = stackImages(0.8,([imgContour]))
 
         cv2.imshow("Result",imgStack)
         ObjectAnalysis(figur)
-        time.sleep(2)
+        #time.sleep(2)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
