@@ -1,0 +1,16 @@
+! This file contain a function for RobotStudio
+! Setup function for the Server
+
+MODULE socketTilKobling
+    VAR socketdev server;
+    VAR socketdev client;
+    CONST SERVER_IP:= "127.0.0.0";
+    CONST PORT:= 8888;
+
+    PROC Broker() ! Et annet navn for server
+        SocketCreate server; !Lager serveren
+        SocketBind server, SERVER_IP, PORT; ! setter opp porter den bindes opp til
+        SocketListen server; !setter serveren til å lytte etter clienter
+        SocketAccept server, client,\ClientAddress:=clientIP,\Time:=120; !accepterer clienten
+    ENDPROC
+ENDMODULE
