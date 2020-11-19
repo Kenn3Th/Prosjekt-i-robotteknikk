@@ -8,7 +8,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
 
-shape = ["square", "triangle", "hexagon","circle"]
+shapes = ["square", "triangle", "hexagon", "circle"]
 
 
 
@@ -86,15 +86,48 @@ def getContours(img,imgContour):
             center = (cX,cY)
     return edges,center
 
-def ObjectAnalysis(edges):
+def number2string(number): # Konverterer nummer til string
+    StrNumber = str(number)
+    length = len(StrNumber)
+    if length == 3:
+        return StrNumber
+    elif length == 2:
+        return '0' + StrNumber
+    elif length == 1:
+        return '00' + StrNumber
+
+def pixel2metric(pixel): # Under konstruksjon
+    forholdstall = 1/3 # Må finne forholdstallet slik at pixel blir mm eller cm!!
+    metric = forholdstall*pixel
+    return floor(metric) # floor runder ned til nærmeste heltall
+
+def ObjectAnalysis(edges, centerPoint):
+
+    xCoor = centerPoint[0] # X koordinat
+    yCoor = centerPoint[1] # Y koordinat
+
+    #xCoor = pixel2metric(xCoor) # konverterer til mm eller cm
+    #yCoor = pixel2metric(yCoor) # konverterer til mm eller cm
+
+    xCoor = number2string(xCoor) # konverterer til string
+    yCoor = number2string(yCoor) # konverterer til string
+
+    shape = ''
     if edges == 3:
-        print(shape[1])
+        print(shapes[1])
+        shape = 'TRE'
     elif edges == 4:
-        print(shape[0])
+        print(shapes[0])
+        shape = 'FIR'
     elif edges == 6:
-        print(shape[2])
+        print(shapes[2])
+        shape = 'HEX'
     elif edges == 8:
-        print(shape[3])
+        print(shapes[3])
+        shape = 'CRC'
+
+    msg = shape + 'X' + xCoor + 'Y' yCoor
+    return msg
 
 
 
@@ -115,7 +148,7 @@ if __name__ == "__main__":
         kernel = np.ones((5,5))
         imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
         figur,center = getContours(imgDil,imgContour)
-        print(center)
+        #print(center)
         
 
         imgStack = stackImages(0.8,([imgContour]))
