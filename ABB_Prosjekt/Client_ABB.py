@@ -11,17 +11,42 @@ client.connect((HOST_IP,port)) # Socket oppkobling
 
 print(f"Fått tilgang til {HOST_IP}")
 
-center = [[50,100],[200,150],[0,0],[185,70],[185,70],[250,170],[185,70],[185,70],[185,70],[0,0]]
+center = [[50,100],[200,150],[185,70],[250,170]]
+edges = [3,4,6,8]
 i = 0
+food = ""
+
 while True: 
+    success, img = cap.read()
+    img = cv2.flip(img,0)
+    imgContour = img.copy()
+
+    imgBlur = cv2.GaussianBlur(img,(7,7),1)
+    imgGray = cv2.cvtColor(imgBlur,cv2.COLOR_BGR2GRAY)
+
+    threshhold1 = cv2.getTrackbarPos("Threshhold1","Parameters")
+    threshhold2 = cv2.getTrackbarPos("Threshhold2","Parameters")
+    imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
+    kernel = np.ones((5,5))
+    imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
+
+    figur,center = getContours(imgDil,imgContour) # Finner 
+
+    imgStack = stackImages(0.8,([imgContour])) # Lager en matrise med flere bilder
+
     data = client.recv(1024)
     print("\n"+data.decode(encoding))
-    if data == "Feed me!":
-        food = ObjectAnalysis(i+3, center[i])
+    msg = ObjectAnalysis(figur, center)
+    print(msg)
+    time.sleep(2)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    if data.decode(encoding) == "Feed me!":
+        food = ObjectAnalysis(edges[i], center[i])
         client.send(bytes(food,encoding))
         print(food)
         i += 1
-    if i>10:
+    if i>=3:
         i=0
 
     #time.sleep(20)

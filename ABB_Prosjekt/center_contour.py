@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import time
 
-frameWidth = 1680    
-frameHight = 1050
+frameWidth = 1920    
+frameHight = 1080
 cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
@@ -80,17 +80,17 @@ def number2string(number): # Konverterer nummer til string
         return '00' + StrNumber
 
 def pixel2metric(pixel): # Under konstruksjon
-    forholdstall = 1/3 # Maa finne forholdstallet slik at pixel blir mm eller cm!!
-    metric = forholdstall*pixel
-    return floor(metric) # floor runder ned til naermeste heltall
+    forholdstall = 417.0/1080.0 # mm/pixel
+    metric = pixel*forholdstall # Metric er millimeter
+    return np.floor(metric) # ceil runder opp til naermeste heltall
 
 def ObjectAnalysis(edges, centerPoint):
 
     xCoor = centerPoint[0] # X koordinat
     yCoor = centerPoint[1] # Y koordinat
 
-    #xCoor = pixel2metric(xCoor) # konverterer til mm eller cm
-    #yCoor = pixel2metric(yCoor) # konverterer til mm eller cm
+    xCoor = pixel2metric(xCoor) # konverterer til mm eller cm
+    yCoor = pixel2metric(yCoor) # konverterer til mm eller cm
 
     xCoor = number2string(xCoor) # konverterer til string
     yCoor = number2string(yCoor) # konverterer til string
@@ -128,6 +128,7 @@ if __name__ == "__main__":
 
     while True:
         success, img = cap.read()
+        img = cv2.flip(img,0)
         imgContour = img.copy()
 
         imgBlur = cv2.GaussianBlur(img,(7,7),1)
