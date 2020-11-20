@@ -98,10 +98,10 @@ def ObjectAnalysis(edges, centerPoint):
     shape = ''
     if edges == 3:
         #print(shapes[1])
-        shape = 'TRE'
+        shape = 'TRI'
     elif edges == 4:
         #print(shapes[0])
-        shape = 'FIR'
+        shape = 'SQR'
     elif edges == 6:
         #print(shapes[2])
         shape = 'HEX'
@@ -116,6 +116,7 @@ def ObjectAnalysis(edges, centerPoint):
 
 
 if __name__ == "__main__":
+
     def empty(a):
         pass
 
