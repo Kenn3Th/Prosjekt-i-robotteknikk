@@ -10,20 +10,6 @@ cap.set(4, frameHight)
 
 shapes = ["square", "triangle", "hexagon", "circle"]
 
-
-
-def empty(a):
-    pass
-
-
-cv2.namedWindow("Parameters")
-cv2.resizeWindow("Parameters",640,240)
-cv2.createTrackbar("Threshhold1","Parameters",60,255,empty)
-cv2.createTrackbar("Threshhold2","Parameters",50,255,empty)
-cv2.createTrackbar("Area","Parameters",10000,50000,empty)
-
-
-
 def stackImages(scale,imgArray):
     rows = len(imgArray)
     cols = len(imgArray[0])
@@ -56,11 +42,8 @@ def stackImages(scale,imgArray):
     return ver
 
 
-
-def getContours(img,imgContour):
-
-
-    contours,hierarchy = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
+def getContours(imgContour, img):
+    contours, hierarchy = cv2.findContours(imgContour,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     edges = 0
     center = []
 
@@ -72,16 +55,16 @@ def getContours(img,imgContour):
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         if area>areaMin:
-            cv2.drawContours(imgContour,contours,-1,(255,0,255,5))
-            cv2.circle(imgContour,(cX,cY),7,(255,255,255 ),-1)
-            cv2.putText(imgContour, "center", (cX - 20, cY - 20),
+            cv2.drawContours(img,contours,-1,(255,0,255,5))
+            cv2.circle(img,(cX,cY),7,(255,255,255 ),-1)
+            cv2.putText(img, "center", (cX - 20, cY - 20),
 		            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
             peri = cv2.arcLength(cnt,True)
             approx = cv2.approxPolyDP(cnt,0.02*peri,True)
             x,y,w,h = cv2.boundingRect(approx)
-            cv2.rectangle(imgContour, (x,y), (x + w, y + h), (0,255,0), 5)
-            cv2.putText(imgContour, "Points: " + str(len(approx)), (x + w + 20, y + 20), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
-            cv2.putText(imgContour, "Area: " + str(int(area)), (x + w + 20, y + 45), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
+            cv2.rectangle(img, (x,y), (x + w, y + h), (0,255,0), 5)
+            cv2.putText(img, "Points: " + str(len(approx)), (x + w + 20, y + 20), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
+            cv2.putText(img, "Area: " + str(int(area)), (x + w + 20, y + 45), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
             edges = len(approx)
             center = (cX,cY)
     return edges,center
@@ -97,9 +80,9 @@ def number2string(number): # Konverterer nummer til string
         return '00' + StrNumber
 
 def pixel2metric(pixel): # Under konstruksjon
-    forholdstall = 1/3 # Må finne forholdstallet slik at pixel blir mm eller cm!!
+    forholdstall = 1/3 # Maa finne forholdstallet slik at pixel blir mm eller cm!!
     metric = forholdstall*pixel
-    return floor(metric) # floor runder ned til nærmeste heltall
+    return floor(metric) # floor runder ned til naermeste heltall
 
 def ObjectAnalysis(edges, centerPoint):
 
@@ -133,6 +116,14 @@ def ObjectAnalysis(edges, centerPoint):
 
 
 if __name__ == "__main__":
+    def empty(a):
+        pass
+
+    cv2.namedWindow("Parameters")
+    cv2.resizeWindow("Parameters",640,240)
+    cv2.createTrackbar("Threshhold1","Parameters",60,255,empty)
+    cv2.createTrackbar("Threshhold2","Parameters",50,255,empty)
+    cv2.createTrackbar("Area","Parameters",10000,50000,empty)
 
     while True:
         success, img = cap.read()
@@ -146,13 +137,15 @@ if __name__ == "__main__":
         imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
         kernel = np.ones((5,5))
         imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
-        figur,center = getContours(imgDil,imgContour)
+
+        figur,center = getContours(imgDil,imgContour) # Finner 
         #print(center)
         
 
-        imgStack = stackImages(0.8,([imgContour]))
+        imgStack = stackImages(0.8,([imgContour])) # Lager en matrise med flere bilder
 
-        cv2.imshow("Result",imgStack)
+        cv2.imshow("Result",imgStack) # Viser resultat paa skjerm 
+
         msg = ObjectAnalysis(figur, center)
         print(msg)
         time.sleep(2)
