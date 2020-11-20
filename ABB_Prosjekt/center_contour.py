@@ -1,12 +1,15 @@
 import cv2
 import numpy as np
 import time
+from math import floor
 
 frameWidth = 1920    
 frameHight = 1080
+FPS = 1 # Frames Per Second
 cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
+cap.set(5, FPS)
 
 shapes = ["square", "triangle", "hexagon", "circle"]
 
@@ -49,7 +52,7 @@ def getContours(imgContour, img):
 
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        areaMin = cv2.getTrackbarPos("Area", "Parameters")
+        areaMin = 1000
         #find center
         M = cv2.moments(cnt)
         cX = int(M["m10"] / M["m00"])
@@ -80,9 +83,9 @@ def number2string(number): # Konverterer nummer til string
         return '00' + StrNumber
 
 def pixel2metric(pixel): # Under konstruksjon
-    forholdstall = 417.0/1080.0 # mm/pixel
-    metric = pixel*forholdstall # Metric er millimeter
-    return np.floor(metric) # ceil runder opp til naermeste heltall
+    forholdstall = 409.0/1080.0 # mm/pixel
+    metric = floor(pixel*forholdstall) # Metric er millimeter
+    return metric # ceil runder opp til naermeste heltall
 
 def ObjectAnalysis(edges, centerPoint):
 
@@ -105,7 +108,7 @@ def ObjectAnalysis(edges, centerPoint):
     elif edges == 6:
         #print(shapes[2])
         shape = 'HEX'
-    elif edges == 8:
+    elif edges > 7:
         #print(shapes[3])
         shape = 'CRC'
     msg = ''

@@ -24,30 +24,23 @@ while True:
     imgBlur = cv2.GaussianBlur(img,(7,7),1)
     imgGray = cv2.cvtColor(imgBlur,cv2.COLOR_BGR2GRAY)
 
-    threshhold1 = cv2.getTrackbarPos("Threshhold1","Parameters")
-    threshhold2 = cv2.getTrackbarPos("Threshhold2","Parameters")
+    threshhold1 = 60
+    threshhold2 = 50
     imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
     kernel = np.ones((5,5))
     imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
 
-    figur,center = getContours(imgDil,imgContour) # Finner 
+    figur,center = getContours(imgDil,imgContour) 
 
     imgStack = stackImages(0.8,([imgContour])) # Lager en matrise med flere bilder
 
     data = client.recv(1024)
     print("\n"+data.decode(encoding))
-    msg = ObjectAnalysis(figur, center)
-    print(msg)
-    time.sleep(2)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+
     if data.decode(encoding) == "Feed me!":
-        food = ObjectAnalysis(edges[i], center[i])
+        food = ObjectAnalysis(figur, center)
         client.send(bytes(food,encoding))
         print(food)
-        i += 1
-    if i>=3:
-        i=0
 
     #time.sleep(20)
     if cv2.waitKey(1) & 0xFF == ord('q'):
