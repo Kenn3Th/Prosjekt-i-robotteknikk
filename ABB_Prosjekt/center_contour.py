@@ -6,10 +6,12 @@ from math import floor
 frameWidth = 1920    
 frameHight = 1080
 FPS = 1 # Frames Per Second
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(2)
 cap.set(3, frameWidth)
 cap.set(4, frameHight)
 cap.set(5, FPS)
+
+
 
 shapes = ["square", "triangle", "hexagon", "circle"]
 
@@ -52,12 +54,13 @@ def getContours(imgContour, img):
 
     for cnt in contours:
         area = cv2.contourArea(cnt)
-        areaMin = 1000
+        areaMin = 5000
+        areaMax = 35000
         #find center
         M = cv2.moments(cnt)
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
-        if area>areaMin:
+        if area>areaMin and area<areaMax:
             cv2.drawContours(img,contours,-1,(255,0,255,5))
             cv2.circle(img,(cX,cY),7,(255,255,255 ),-1)
             cv2.putText(img, "center", (cX - 20, cY - 20),
@@ -100,16 +103,16 @@ def ObjectAnalysis(edges, centerPoint):
 
     shape = ''
     if edges == 3:
-        #print(shapes[1])
+        print(shapes[1])
         shape = 'TRI'
     elif edges == 4:
-        #print(shapes[0])
+        print(shapes[0])
         shape = 'SQR'
     elif edges == 6:
-        #print(shapes[2])
+        print(shapes[2])
         shape = 'HEX'
-    elif edges > 7:
-        #print(shapes[3])
+    elif edges == 8:
+        print(shapes[3])
         shape = 'CRC'
     msg = ''
     if shape!='':
@@ -119,6 +122,7 @@ def ObjectAnalysis(edges, centerPoint):
 
 
 if __name__ == "__main__":
+
 
     def empty(a):
         pass
