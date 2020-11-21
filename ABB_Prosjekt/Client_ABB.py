@@ -1,5 +1,6 @@
 from center_contour import*
 import socket
+import time
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -41,6 +42,7 @@ while True:
         food = ObjectAnalysis(figur, center)
         client.send(bytes(food,encoding))
         print(food)
+        time.sleep(5)
 
     #time.sleep(20)
     if cv2.waitKey(1) & 0xFF == ord('q'):

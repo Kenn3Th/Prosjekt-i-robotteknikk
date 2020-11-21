@@ -70,7 +70,7 @@ def getContours(imgContour, img):
             cv2.putText(img, "Area: " + str(int(area)), (x + w + 20, y + 45), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0,255,0), 2)
             edges = len(approx)
             center = (cX,cY)
-    return edges,center
+    return edges, center
 
 def number2string(number): # Konverterer nummer til string
     StrNumber = str(number)
@@ -108,7 +108,7 @@ def ObjectAnalysis(edges, centerPoint):
     elif edges == 6:
         #print(shapes[2])
         shape = 'HEX'
-    elif edges > 7:
+    elif edges == 7:
         #print(shapes[3])
         shape = 'CRC'
     msg = ''
