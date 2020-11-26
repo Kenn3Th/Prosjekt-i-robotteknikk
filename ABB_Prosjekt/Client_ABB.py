@@ -48,10 +48,16 @@ while True:
 
     print("before if")
     msg = ""
+    
     if data.decode(encoding) == "Feed me!":
         msg = imageProcess()
-        client.send(bytes(msg, encoding))
-        print(msg)
+        prev_msg = msg
+        if pref_msg == msg or msg == "":
+            print(f"msg = {msg}")
+            pass
+        else:
+            client.send(bytes(msg, encoding))
+            print(f" beskjed = {msg}")
         time.sleep(5)
 
 

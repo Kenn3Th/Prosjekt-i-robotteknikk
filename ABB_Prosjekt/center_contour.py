@@ -101,7 +101,7 @@ def ObjectAnalysis(edges, centerPoint):
     elif edges == 6:
         print(shapes[2])
         shape = 'HEX'
-    elif edges == 7:
+    elif edges == 8:
         #print(shapes[3])
         shape = 'CRC'
     msg = ''
