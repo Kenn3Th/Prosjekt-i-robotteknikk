@@ -51,11 +51,12 @@ while True:
     
     if data.decode(encoding) == "Feed me!":
         msg = imageProcess()
-        prev_msg = msg
+        prev_msg = ""
         if pref_msg == msg or msg == "":
             print(f"msg = {msg}")
             pass
         else:
+            prev_msg = msg
             client.send(bytes(msg, encoding))
             print(f" beskjed = {msg}")
         time.sleep(5)
