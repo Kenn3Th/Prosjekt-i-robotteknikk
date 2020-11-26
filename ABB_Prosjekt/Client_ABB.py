@@ -43,7 +43,7 @@ while True:
     print("\n"+data.decode(encoding))
     motatt = data.decode(encoding) 
     msg = ""
-    
+
     if motatt == "Feed me!" or motatt == "Feed me!Feed me!":
         msg = imageProcess()
         if msg == "":
@@ -53,7 +53,7 @@ while True:
         
         client.send(bytes(msg, encoding))
         print(f"beskjed sendt = {msg}")
-        time.sleep(3)
+
 
 
 
