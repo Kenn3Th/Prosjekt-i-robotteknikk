@@ -53,7 +53,6 @@ while True:
     
     if data.decode(encoding) == "Feed me!":
         msg = imageProcess()
-        prev_msg = ""
         if prev_msg == msg or msg == "":
             print(f"msg = {msg}")
             pass
