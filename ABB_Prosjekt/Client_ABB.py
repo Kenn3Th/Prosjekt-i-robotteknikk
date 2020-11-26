@@ -34,10 +34,6 @@ def imageProcess():
     imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
     kernel = np.ones((5,5))
     imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
-
-    imgStack = stackImages(0.8,([imgContour]))
-    cv2.imshow("Result",imgStack) # Viser resultat paa skjerm 
-
     figur,center = getContours(imgDil,imgContour) 
     food = ObjectAnalysis(figur, center)
     return food
