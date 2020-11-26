@@ -41,6 +41,7 @@ def imageProcess():
     
 prev_msg = ""
 while True: 
+    print("In while loop")
     
     data = client.recv(1024)
     print("\n"+data.decode(encoding))
