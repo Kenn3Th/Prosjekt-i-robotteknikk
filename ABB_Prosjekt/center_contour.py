@@ -107,7 +107,6 @@ def ObjectAnalysis(edges, centerPoint):
     msg = ''
     if shape!='':
         msg = shape + 'X' + xCoor + 'Y' + yCoor
-    print("from object analysis function")
     print(msg)
     return msg
 
@@ -133,7 +132,6 @@ if __name__ == "__main__":
     cv2.createTrackbar("Area","Parameters",10000,50000,empty)
 
     def imageProcess():
-        print("in side function")
         food = "" # Empty msg to be returned
         success, img = cap.read()
         img = cv2.flip(img,0)
@@ -154,8 +152,8 @@ if __name__ == "__main__":
         #imgStack = stackImages(0.8,([imgContour]))
         #cv2.imshow("Result",imgStack) # Viser resultat paa skjerm 
         print("About to exit function")
-        print("msg in imageProcessing function")
-        print(food)
+        print(f"msg in imageProcessing function is {food}")
+        print(f"find edges {figur} and center is {center}")
         return food
     i=0
     while True:
