@@ -51,7 +51,6 @@ while True:
             msg = imageProcess()
             print(f"ny beskjed = {msg}")
         
-        prev_msg = msg
         client.send(bytes(msg, encoding))
         print(f"beskjed sendt = {msg}")
         time.sleep(3)
