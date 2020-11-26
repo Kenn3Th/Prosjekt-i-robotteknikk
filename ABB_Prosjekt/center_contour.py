@@ -107,7 +107,6 @@ def ObjectAnalysis(edges, centerPoint):
     msg = ''
     if shape!='':
         msg = shape + 'X' + xCoor + 'Y' + yCoor
-    print(msg)
     return msg
 
 

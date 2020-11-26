@@ -38,28 +38,23 @@ def imageProcess():
     food = ObjectAnalysis(figur, center)
     return food
     
-prev_msg = ""
 while True: 
-    print("In while loop")
-    
     data = client.recv(1024)
     print("\n"+data.decode(encoding))
 
-    #imgStack = stackImages(0.8,([imgContour])) # Lager en matrise med flere bilder
-
-    print("before if")
     msg = ""
     
     if data.decode(encoding) == "Feed me!":
         msg = imageProcess()
-        if prev_msg == msg or msg == "":
+        if msg == "":
+            print("beskjeden var tom")
             msg = imageProcess()
-            print(f"message = {msg}")
+            print(f"ny beskjed = {msg}")
         
         prev_msg = msg
         client.send(bytes(msg, encoding))
-        print(f" beskjed = {msg}")
-        time.sleep(5)
+        print(f"beskjed sendt = {msg}")
+        time.sleep(3)
 
 
 
