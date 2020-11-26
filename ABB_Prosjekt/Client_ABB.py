@@ -12,15 +12,8 @@ client.connect((HOST_IP,port)) # Socket oppkobling
 
 print(f"Fått tilgang til {HOST_IP}")
 
-
-
-
-while True: 
-    
-    data = client.recv(1024)
-    print("\n"+data.decode(encoding))
-
-    food = ""
+def imageProcess():
+    food = "" # Empty msg to be returned
     success, img = cap.read()
     img = cv2.flip(img,0)
     imgContour = img.copy()
@@ -35,18 +28,23 @@ while True:
     imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
 
     figur,center = getContours(imgDil,imgContour) 
+    food = ObjectAnalysis(figur, center)
+    return food
+
+while True: 
+    
+    data = client.recv(1024)
+    print("\n"+data.decode(encoding))
 
     #imgStack = stackImages(0.8,([imgContour])) # Lager en matrise med flere bilder
 
     print("before if")
-
-
-
+    msg = ""
     if data.decode(encoding) == "Feed me!":
         #if type(figur) == int:
-        food = ObjectAnalysis(figur, center)
-        client.send(bytes(food,encoding))
-        print(food)
+        msg = imageProcess()
+        client.send(bytes(msg, encoding))
+        print(msg)
         time.sleep(5)
 
 
