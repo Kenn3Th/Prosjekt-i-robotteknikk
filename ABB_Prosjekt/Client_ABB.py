@@ -41,17 +41,16 @@ def imageProcess():
 while True: 
     data = client.recv(1024)
     print("\n"+data.decode(encoding))
-
+    motatt = data.decode(encoding) 
     msg = ""
     
-    if data.decode(encoding) == "Feed me!":
+    if motatt == "Feed me!" or motatt == "Feed me!Feed me!":
         msg = imageProcess()
         if msg == "":
             print("beskjeden var tom")
             msg = imageProcess()
             print(f"ny beskjed = {msg}")
         
-        prev_msg = msg
         client.send(bytes(msg, encoding))
         print(f"beskjed sendt = {msg}")
         time.sleep(3)
