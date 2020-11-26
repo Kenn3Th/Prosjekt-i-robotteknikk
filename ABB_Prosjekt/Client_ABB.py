@@ -38,7 +38,8 @@ def imageProcess():
     figur,center = getContours(imgDil,imgContour) 
     food = ObjectAnalysis(figur, center)
     return food
-
+    
+prev_msg = ""
 while True: 
     
     data = client.recv(1024)
@@ -52,7 +53,7 @@ while True:
     if data.decode(encoding) == "Feed me!":
         msg = imageProcess()
         prev_msg = ""
-        if pref_msg == msg or msg == "":
+        if prev_msg == msg or msg == "":
             print(f"msg = {msg}")
             pass
         else:
