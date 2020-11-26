@@ -3,16 +3,6 @@ import numpy as np
 import time
 from math import floor
 
-frameWidth = 1920    
-frameHight = 1080
-FPS = 1 # Frames Per Second
-cap = cv2.VideoCapture(2)
-cap.set(3, frameWidth)
-cap.set(4, frameHight)
-cap.set(5, FPS)
-
-
-
 shapes = ["square", "triangle", "hexagon", "circle"]
 
 def stackImages(scale,imgArray):
@@ -123,6 +113,13 @@ def ObjectAnalysis(edges, centerPoint):
 
 if __name__ == "__main__":
 
+    frameWidth = 1920    
+    frameHight = 1080
+    FPS = 1 # Frames Per Second
+    cap = cv2.VideoCapture(2)
+    cap.set(3, frameWidth)
+    cap.set(4, frameHight)
+    cap.set(5, FPS)
 
     def empty(a):
         pass

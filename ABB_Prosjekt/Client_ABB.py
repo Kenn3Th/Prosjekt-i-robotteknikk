@@ -8,6 +8,14 @@ HOST_IP = '192.168.12.97'
 port = 2222
 encoding = 'utf-8'
 
+frameWidth = 1920    
+frameHight = 1080
+FPS = 1 # Frames Per Second
+cap = cv2.VideoCapture(2)
+cap.set(3, frameWidth)
+cap.set(4, frameHight)
+cap.set(5, FPS)
+
 client.connect((HOST_IP,port)) # Socket oppkobling
 
 print(f"Fått tilgang til {HOST_IP}")
@@ -41,7 +49,6 @@ while True:
     print("before if")
     msg = ""
     if data.decode(encoding) == "Feed me!":
-        #if type(figur) == int:
         msg = imageProcess()
         client.send(bytes(msg, encoding))
         print(msg)
