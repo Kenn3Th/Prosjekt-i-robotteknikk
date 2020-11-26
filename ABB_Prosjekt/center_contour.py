@@ -101,7 +101,7 @@ def ObjectAnalysis(edges, centerPoint):
     elif edges == 6:
         print(shapes[2])
         shape = 'HEX'
-    elif edges == 8:
+    elif edges > 7 and edges <11:
         #print(shapes[3])
         shape = 'CRC'
     msg = ''
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         return food
     i=0
     while True:
-        """
+        
         success, img = cap.read()
         img = cv2.flip(img,0)
         imgContour = img.copy()
@@ -182,7 +182,7 @@ if __name__ == "__main__":
         msg = ObjectAnalysis(figur, center)
         print(msg)
         time.sleep(2)
-        """
+        """     
         i += 1
         msg = ""
         if i == 50:
@@ -191,6 +191,6 @@ if __name__ == "__main__":
             print("from if in while")
             print(msg)
             print("exit if statement")
-
+        """
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
