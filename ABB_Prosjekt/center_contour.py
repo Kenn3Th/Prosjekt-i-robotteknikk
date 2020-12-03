@@ -6,6 +6,11 @@ from math import floor
 shapes = ["square", "triangle", "hexagon", "circle"]
 
 def stackImages(scale,imgArray):
+    '''
+    Denne funksjonen legger bilder lagvis på hverandre. Det er nyttig
+    hvis man vil se live hvordan programmet håndterer det den ser. 
+    Brukes med cv2.imshow()
+    '''
     rows = len(imgArray)
     cols = len(imgArray[0])
     rowsAvailable = isinstance(imgArray[0], list)
@@ -38,6 +43,14 @@ def stackImages(scale,imgArray):
 
 
 def getContours(imgContour, img):
+    '''
+    Denne funksjonen identifiserer hvilken geometrisk figurer bilde har
+    ved å telle antall kanter den ser samt hvor mange figurer det finnes i bilde. 
+    Det blir også kalkulert senterpunktet til figurene. Dette blir tegnet på bilde
+    hvis man vil se hva funksjonen gjør visuelt.
+    Funksjonen returnerer antall kanter til figuren nederst til venstre og 
+    koordinatene til senterpunktet.
+    '''
     contours, hierarchy = cv2.findContours(imgContour,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     edges = 0
     center = []
@@ -65,7 +78,11 @@ def getContours(imgContour, img):
             center = (cX,cY)
     return edges, center
 
-def number2string(number): # Konverterer nummer til string
+def number2string(number): 
+    '''
+    Konverterer nummeriske verdier til string 
+    og returnerer stringen
+    '''
     StrNumber = str(number)
     length = len(StrNumber)
     if length == 3:
@@ -75,12 +92,23 @@ def number2string(number): # Konverterer nummer til string
     elif length == 1:
         return '00' + StrNumber
 
-def pixel2metric(pixel): # Under konstruksjon
+def pixel2metric(pixel):
+    '''
+    Her blir piksel verdier konvertert til millimeter 
+    og returnerer millimeter verdien
+    '''
     forholdstall = 409.0/1080.0 # mm/pixel
     metric = floor(pixel*forholdstall) # Metric er millimeter
     return metric # ceil runder opp til naermeste heltall
 
 def ObjectAnalysis(edges, centerPoint):
+    '''
+    Tar i mot antall kanter som er identifisert samt piksel 
+    koordinatene til senterpunktet. Tallene blir så konvert til 
+    string og det blir returnert figur identificasjon, x og y 
+    koordinater til senterpunktet som en string. 
+    Eksempel melding: SQRX050Y233
+    '''
 
     xCoor = centerPoint[0] # X koordinat
     yCoor = centerPoint[1] # Y koordinat
@@ -102,12 +130,36 @@ def ObjectAnalysis(edges, centerPoint):
         print(shapes[2])
         shape = 'HEX'
     elif edges > 7 and edges <11:
-        #print(shapes[3])
         shape = 'CRC'
     msg = ''
     if shape!='':
         msg = shape + 'X' + xCoor + 'Y' + yCoor
     return msg
+
+def imageProcess():
+    '''
+    Denne funksjonen tar et bilde fra videokameraet idet funksjonen
+    blir kalt. Deretter bestemme hvilke figurer som er i bilde
+    velge figuren som er nederst til venstre. Så kalkulerer den 
+    sentrum av figuren og tilslutt sender tilbake en string med 
+    figur type samt x og y koordinater til sentrum  
+    '''
+    food = "" # Initialiserer beskjed som skal returneres
+    success, img = cap.read()
+    img = cv2.flip(img,0)
+    imgContour = img.copy()
+
+    imgBlur = cv2.GaussianBlur(img,(7,7),1)
+    imgGray = cv2.cvtColor(imgBlur,cv2.COLOR_BGR2GRAY)
+
+    threshhold1 = 55
+    threshhold2 = 50
+    imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
+    kernel = np.ones((5,5))
+    imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
+    figur,center = getContours(imgDil,imgContour) 
+    food = ObjectAnalysis(figur, center)
+    return food
 
 
 
@@ -130,30 +182,6 @@ if __name__ == "__main__":
     cv2.createTrackbar("Threshhold2","Parameters",50,255,empty)
     cv2.createTrackbar("Area","Parameters",10000,50000,empty)
 
-    def imageProcess():
-        food = "" # Empty msg to be returned
-        success, img = cap.read()
-        img = cv2.flip(img,0)
-        imgContour = img.copy()
-
-        imgBlur = cv2.GaussianBlur(img,(7,7),1)
-        imgGray = cv2.cvtColor(imgBlur,cv2.COLOR_BGR2GRAY)
-
-        threshhold1 = 55
-        threshhold2 = 50
-        imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
-        kernel = np.ones((5,5))
-        imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
-
-        figur,center = getContours(imgDil,imgContour) 
-        food = ObjectAnalysis(figur, center)
-
-        #imgStack = stackImages(0.8,([imgContour]))
-        #cv2.imshow("Result",imgStack) # Viser resultat paa skjerm 
-        print("About to exit function")
-        print(f"msg in imageProcessing function is {food}")
-        print(f"find edges {figur} and center is {center}")
-        return food
     i=0
     while True:
         

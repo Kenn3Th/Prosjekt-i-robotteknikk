@@ -2,44 +2,27 @@ from center_contour import*
 import socket
 import time
 
+# Initialiserer oppløsningen til kameraet
+frameWidth = 1920    
+frameHight = 1080
+FPS = 1 # Frames Per Second
+cap = cv2.VideoCapture(2) # Starter kameraet fra COM port 2
+cap.set(3, frameWidth)
+cap.set(4, frameHight)
+cap.set(5, FPS)
+#-------- Socket programmering --------#
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 HOST_IP = '192.168.12.97'
 port = 2222
-encoding = 'utf-8'
-
-frameWidth = 1920    
-frameHight = 1080
-FPS = 1 # Frames Per Second
-cap = cv2.VideoCapture(2)
-cap.set(3, frameWidth)
-cap.set(4, frameHight)
-cap.set(5, FPS)
+encoding = 'utf-8' # Definerer hvilket bibliotek den skal bruke for å tolke beskjeden
 
 client.connect((HOST_IP,port)) # Socket oppkobling
 
-print(f"Fått tilgang til {HOST_IP}")
-
-def imageProcess():
-    food = "" # Empty msg to be returned
-    success, img = cap.read()
-    img = cv2.flip(img,0)
-    imgContour = img.copy()
-
-    imgBlur = cv2.GaussianBlur(img,(7,7),1)
-    imgGray = cv2.cvtColor(imgBlur,cv2.COLOR_BGR2GRAY)
-
-    threshhold1 = 55
-    threshhold2 = 50
-    imgCanny = cv2.Canny(imgGray,threshhold1,threshhold2)
-    kernel = np.ones((5,5))
-    imgDil = cv2.dilate(imgCanny,kernel,iterations=1)
-    figur,center = getContours(imgDil,imgContour) 
-    food = ObjectAnalysis(figur, center)
-    return food
+print(f"Fått tilgang til {HOST_IP}") # Verifiserer at den har fått tilgang til verten
     
 while True: 
-    data = client.recv(1024)
+    data = client.recv(1024) #Definerer at vi kan motta 1024bit.
     print("\n"+data.decode(encoding))
     motatt = data.decode(encoding) 
     msg = ""
@@ -47,14 +30,9 @@ while True:
     if motatt == "Feed me!" or motatt == "Feed me!Feed me!":
         msg = imageProcess()
         if msg == "":
-            print("beskjeden var tom")
             msg = imageProcess()
-            print(f"ny beskjed = {msg}")
         
         client.send(bytes(msg, encoding))
         print(f"beskjed sendt = {msg}")
-
-
-
 
 client.close()
