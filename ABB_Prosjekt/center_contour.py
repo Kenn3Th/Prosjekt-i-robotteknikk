@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
-import time
 from math import floor
-
-shapes = ["square", "triangle", "hexagon", "circle"]
 
 def stackImages(scale,imgArray):
     '''
@@ -164,6 +161,7 @@ def imageProcess():
 
 
 if __name__ == "__main__":
+    import time
 
     frameWidth = 1920    
     frameHight = 1080
