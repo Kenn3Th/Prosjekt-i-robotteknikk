@@ -1,6 +1,5 @@
 from center_contour import*
 import socket
-import time
 
 #-------- Kamera settings --------#
 # Initialiserer oppløsningen til kameraet
