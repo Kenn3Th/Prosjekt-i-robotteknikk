@@ -395,26 +395,6 @@ Email: s@oslomet.no}}
 % the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
 % after \documentclass
 
-% for over three affiliations, or if they all won't fit within the width
-% of the page, use this alternative format:
-% 
-%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
-%Homer Simpson\IEEEauthorrefmark{2},
-%James Kirk\IEEEauthorrefmark{3}, 
-%Montgomery Scott\IEEEauthorrefmark{3} and
-%Eldon Tyrell\IEEEauthorrefmark{4}}
-%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-%Georgia Institute of Technology,
-%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-%Email: homer@thesimpsons.com}
-%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
-%Telephone: (800) 555--1212, Fax: (888) 555--1212}
-%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
-
-
-
-
 % use for special paper notices
 %\IEEEspecialpapernotice{(Invited Paper)}
 
@@ -548,11 +528,6 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         Kommunikasjonsprotokollen som normalt brukes er TCP, hvor man har god kontroll på at meldingene mottas i den formen de ble sendt. Mottakeren 
         kan bekrefte meldingen – og pakker som ikke når frem overføres på nytt av avsender.
         % # TODO: Legg til socket progerammerings bilde
-        \begin{figure}
-            \includegraphics[width = \textwidth]{}
-            \caption{}
-            \label{fig:socket}
-        \end{figure}
 
         \subsubsection{Transport Control Protocol (TCP)}
             Både tjener og klient etablerer socket. Tjeneren binder socket-en til spesifisert adresse og port, og lytter passivt etter klientens 
@@ -700,23 +675,6 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
     virtuelle verden og den virkelige verden ikke alltid er lik. Det var derfor nødvendig med noe finjustering. Dette kom spesielt frem når vi 
     skulle synkronisere kameraets arbeidsområde til robotarmens arbeidsområde. 
 
-\appendix
-
-\subsection{NAO - kode}
-NAO snakker og går
-\lstinputlisting[language=Python,firstline=2]{../NAOProsjekt/NAO20.py}
-NAO lokaliserer en rød ball og går til den
-\lstinputlisting[language=Python,firstline=14]{../NAOProsjekt/NAOtesting.py}
-
-\subsection{ABB - kode}
-Objektgjenkjenning
-Oppstått et problem som må løses, latex klarer ikke importere et bibliotek i python.... skriv inn koden manuelt!
-%\lstinputlisting[language=Python]{../ABB_Prosjekt/center_contour.py}
-%Klient koden
-%\lstinputlisting[language=Python]{../ABB_Prosjekt/Client_ABB.py}
-
-
-
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
@@ -745,6 +703,9 @@ Oppstått et problem som må løses, latex klarer ikke importere et bibliotek i 
 \bibliography{Robtek_referanser}
 \bibliographystyle{ieeetr}
 
+\newpage
+\appendix
+\input{Tillegg}
 % that's all folks
 \end{document}
 
