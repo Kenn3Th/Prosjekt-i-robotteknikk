@@ -66,7 +66,34 @@
 \documentclass[conference]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
-\usepackage{hyperref}
+\usepackage{listings} % For å importere kode
+\usepackage{xcolor} % for å legge farge på koden
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 
 % Add the compsoc option for Computer Society conferences.
@@ -108,7 +135,7 @@
 
 % *** CITATION PACKAGES ***
 %
-%\usepackage{cite}
+\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of IEEE. Loading the cite package will
@@ -133,7 +160,7 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
   % \graphicspath{{../pdf/}{../jpeg/}}
   % and their extensions so you won't have to specify these with
@@ -241,11 +268,11 @@
 
 
 % *** SUBFIGURE PACKAGES ***
-%\ifCLASSOPTIONcompsoc
-%  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-%\else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-%\fi
+\ifCLASSOPTIONcompsoc
+  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+  \usepackage[caption=false,font=footnotesize]{subfig}
+\fi
 % subfig.sty, written by Steven Douglas Cochran, is the modern replacement
 % for subfigure.sty, the latter of which is no longer maintained and is
 % incompatible with some LaTeX packages including fixltx2e. However,
@@ -310,7 +337,7 @@
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
-%\usepackage{url}
+\usepackage{url}
 % url.sty was written by Donald Arseneau. It provides better support for
 % handling and breaking URLs. url.sty is already installed on most LaTeX
 % systems. The latest version and documentation can be obtained at:
@@ -400,7 +427,15 @@ Email: s@oslomet.no}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Sammendraget av hele rapporten skal stå her. Skal inneholde litt av introduksjon, metode og konklusjon.
+    Denne prosjektoppgaven inneholder nesten to prosjekter da roboten som ble brukt til første prosjektet ble ødelagt etter to uker. 
+    Gruppen ble godt kjent med NAO sitt brukergrensesnitt gjennom dens egne programmerings verktøy “Choreographe” og Aldebran sitt 
+    naoqi-bibliotek i Python 2.7. NAO roboten ble programmert til å finne og gå mot en rød ball før den ble ødelagt. 
+
+    Det endelige prosjektet har ved bruk av en industriell robotarm fra ABB og objektgjenkjenning utarbeidet en løsning som sorterer 
+    geometriske figurer etter fasong. For å få til dette er det benyttet Python programmering med bruk av OpenCV som henter video fra 
+    et kamera som er festet i taket over robotarmen. Socket programming er brukt som kommunikasjonsledd mellom Python og RobotStudio til 
+    å sende informasjon om figurtype og dens posisjon. Dette gjorde det mulig for robotarmen å plukke opp figuren og sortere den til 
+    korrekt endestasjon. 
 \end{abstract}
 
 % no keywords
@@ -475,7 +510,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         Objektgjenkjenning er en datateknologi som benytter datasyn og bildebehandling for å oppdage objekter av en bestemt klasse, f.eks. 
         mennesker, biler eller sykler i digitale bilder og videoer. For å gjenkjenne objekter benyttes det maskinlæring. 
 
-        \paragraph{Maskin læring}
+        \subsubsection{Maskin læring}
             Prosessen med å bruke matematiske datamodeller til å hjelpe en datamaskin med å lære uten direkte instruksjon kalles maskinlæring (ML) \cite{teori:ML}. 
             Dette kan være “enklere” tilnærming som baserer seg på forhåndsdefinerte egenskaper eller “kjennetegn” som sier noe om hva det letes etter 
             og hvordan det skal finnes, hvor dataen etterpå blir klassifisert ved å bruke f.eks. SVM (Support Vector Machine).
@@ -492,7 +527,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         på enden av robotarmen, deriblant en sugekopp. Basen til robotarmen kan monteres enten til bakken/underlaget, i taket eller til veggen, 
         noe som gjør robotarmen veldig allsidig \cite{teori:ABB}. 
 
-    \paragraph{Robotstudio}
+    \subsubsection{Robotstudio}
         Robotarmen styres av programmer som er laget i ABB sitt program RobotStudio. Programmet overføres til en såkalt FlexPendant, som er 
         koblet til og styrer robotarmen. RobotStudio har en innebygget funksjons som gjør det mulig å simulere ønsket program før det testes 
         på den fysiske roboten.
@@ -591,10 +626,87 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
     Resultatene vi oppnådde under dette prosjektet
     
 \section{Diskusjon}
-    Hva kunne vi gjort annerledes eller bedre?
+    \subsection{Simulering og test i RobotStudio}
+        Tekststrengen som ble sendt fra Python programmet ble i første omgang kun lest i sin helhet av programmet i robotstudio. Når den ble mottatt 
+        av programmet i robotstudio viste seg derimot at det var en utfordring med at Python programmet sendte samme tekststreng gjentatte ganger. 
+        Dette førte til at robotarmen prøvde å hente samme figur flere ganger selv om den allerede var flyttet. Løsningen på problemet var å sende 
+        tekststrengen inn i en rekke if-setninger. If-setningene sjekket om ny tekststreng var lik den forrige tekststrengen. De sjekket også om 
+        x-koordinatene var lik forrige x-koordinat eller om y-koordinatene var lik forrige y-koordinat. Hvis en av tilfellene var sant skulle 
+        programmet i RobotStudio se bort i fra denne tekststrengen og vente på neste tekststreng.
+
+        En kombinasjon av at kameraet ikke var montert vinkelrett på arbeidsområdet og at lyset i rommet var dynamisk endrende, kunne skyggene til 
+        objektene noen ganger plukkes opp som egne kanter. Dette resulterte i at en trekant noen ganger ble registrert som en firkant og at sirklene 
+        ikke ble detektert i det hele tatt. Dette kunne utbedres noe ved å justere på parametrene for sensitivitet i Python programkoden. På grunn av 
+        at kameraet modellerer virkeligheten med piksler kommer vi ikke unna at en sirkel som ideelt har 0 kanter faktisk får kanter. Med den 
+        oppløsningen vi hadde var 8 kanter registrert som en sirkel. Derfor ble sirkel-problematikken løst ved å tillate rom for avvik slik at antall 
+        kanter for en sirkel kunne være større enn 7, men mindre enn 10. Vi måtte også ha en restriksjon slik at ikke alt på arbeidsområde kunne tolkes 
+        som en sirkel. 
+
+        OpenCV støtter hovedsakelig bare plug and play enheter, noe som skapte problemer for kommunikasjon mellom openCV og kameraet. Det viste seg at 
+        kameraet hadde flere sensorer som ble knyttet sammen gjennom kamera driveren og programvaren, noe openCV ikke klarte å gjøre. Synsvinkelen til 
+        kameraet ble derfor noe dårligere enn ønsket. Bildet fra kameraet var også speilvendt som gjorde ting vanskelig da openCV behandler dataen med 
+        utgangspunkt i det øverste venstre hjørnet. Det var derfor nødvendig å speilvende tilbake bildet før bildeprosesseringen kunne anvendes. 
+        Speilvendingen av bildet viste seg å være veldig prosesskrevende som resulterte i en treg videostrøm for bildeprosesseringen. En løsning på dette 
+        kunne vært å bruke en datamaskin med en kraftigere grafikkprosessor til å håndtere bildeprosesseringen. 
+
+    \subsection{Test med ABB robotarm}
+        Som følge av gjentatte tester med ABB robotarmen viste det seg at Python programmet detekterte selve robotarmen som en figur og prøvde å sortere 
+        denne. Det ble derfor nødvendig å legge inn en “pause-posisjon” for robotarmen utenfor synet til kameraet, slik at python programmet kunne hente 
+        ny posisjon til neste geometriske figur som skulle sorteres.
+
+        Det viste seg ganske fort at trekant figuren som var laget fungerte dårlig. Den var for liten og ujevn i kantene. Noen ganger ble den registrert 
+        som en annen geometrisk figur og robotarmen prøvde å sortere den til en annen “endestasjon” enn for trekanter. Det viste seg også at størrelsen 
+        på trekanten gjorde det vanskelig for sugekoppen å få tak i den. Derfor ble etterhvert trekanten ekskludert fra gjennomføringen av prosjektet. 
+
+        Mellom hver test i ARIS-laben viste det seg at kameraet i taket hadde flyttet seg litt. Det medførte at arbeidsområdet til ABB robotarmen også 
+        hadde flyttet seg. Det var derfor nødvendig med en justering av arbeidsområdet før det var mulig å kjøre programmet. Det hadde vært ønskelig med 
+        et kamera som var bedre montert i taket og som står vinkelrett mot basen til robotarmen.
+
+    \subsection{Forslag til forbedring av oppgaven}
+        I dette prosjektet ble det brukt et 2D kamera festet i taket over arbeidsområdet. Dette begrenset synsvinkelen til kun å oppfatte hvor objektene 
+        lå i xy-planet. Det var dog ikke mulig å oppfatte høyden på objektene. En utbedring på dette kunne blant annet ha vært å montere et ekstra kamera 
+        som hadde kunnet oppfatte høyden på objektene slik at høyden ikke hadde måttet forhåndsdefineres. 
+
+        For objektgjenkjenning kunne det alternativt blitt trent opp en modell til å gjenkjenne figurene i stedet for å gjenkjenne antall kanter. Dette 
+        hadde resultert i en mer nøyaktig bildegjenkjenning hvor flere objekter kunne blitt implementert, men det hadde samtidig krevd flere arbeidstimer 
+        noe det ikke var tilstrekkelig mange av i dette prosjektet.  
+
+        For å øke bildefrekvensen kunne det blitt benyttet en kraftigere datamaskin. Dette ville forbedret nøyaktigheten og samtidig fikse mye av 
+        problemene som oppstod underveis, f.eks. utfordringen ved at Python programmet sendte samme informasjons-streng flere ganger
+
     
 \section{Konklusjon}
-    Hva lærte vi av dette prosjektet.
+    Det ble lagt mye tid i undersøkelser rundt det første prosjektet vi satt i gang med, finne riktig bibliotek å bruke, nøkkelkode til choreagraphe, 
+    documentasjon om NAO etc. Vi hadde kommet godt i gang med dette prosjektet da den ble ødelagt. Etter en god idemyldring klarte vi å omstille 
+    oss og fant en oppgave som beholdt samme grunntanke. Dette ga oss en myk overgang til prosjekt nummer to.
+
+    OpenCV viste seg å være et meget godt verktøy å bruke når man er ny i bildeprosessering og kunstig intelligens. I emnet ELVE3610 har vi lært 
+    å lage funksjoner i Python, samt bli kjent med hvordan funksjoner ser ut. Dette gjorde at det ble enklere for oss å tolke funksjonene i OpenCV 
+    biblioteket og hvordan utnytte disse. Hadde vi hatt mere tid kunne vi faktisk ha trent vår egen maskinlærings modell til å kjenne igjen de 
+    geometriske figurene i steden for å bruke kantdeteksjon, kanskje til og med laget egenspesifiserte figurer den kjente igjen. 
+
+    En av laboratorieoppgavene vi hadde i kurset innebar å bruke socket programmering som et kommunikasjonsledd mellom RAPID i RobotStudio og et 
+    Python-script. Dette konseptet ble godt implementert i vårt prosjekt og gjorde det mulig å kombinere KI med ABB-robotarmen. 
+
+    I arbeidet med programmeringen i RobotStudio satt vi på mye god kunnskap som var opparbeidet gjennom lab-oppgavene i faget. Likevel gikk det 
+    mye tid til å sette sammen programmodulene og få programmet til å kommunisere på en god måte med Python-scriptet. Ved testing viste seg at den 
+    virtuelle verden og den virkelige verden ikke alltid er lik. Det var derfor nødvendig med noe finjustering. Dette kom spesielt frem når vi 
+    skulle synkronisere kameraets arbeidsområde til robotarmens arbeidsområde. 
+
+\appendix
+
+\subsection{NAO - kode}
+NAO snakker og går
+\lstinputlisting[language=Python,firstline=2]{../NAOProsjekt/NAO20.py}
+NAO lokaliserer en rød ball og går til den
+\lstinputlisting[language=Python,firstline=14]{../NAOProsjekt/NAOtesting.py}
+
+\subsection{ABB - kode}
+Objektgjenkjenning
+Oppstått et problem som må løses, latex klarer ikke importere et bibliotek i python.... skriv inn koden manuelt!
+%\lstinputlisting[language=Python]{../ABB_Prosjekt/center_contour.py}
+%Klient koden
+%\lstinputlisting[language=Python]{../ABB_Prosjekt/Client_ABB.py}
 
 
 
