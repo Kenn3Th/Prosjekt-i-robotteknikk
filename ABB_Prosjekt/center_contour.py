@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 from math import floor
@@ -118,13 +120,10 @@ def ObjectAnalysis(edges, centerPoint):
 
     shape = ''
     if edges == 3:
-        print(shapes[1])
         shape = 'TRI'
     elif edges == 4:
-        print(shapes[0])
         shape = 'SQR'
     elif edges == 6:
-        print(shapes[2])
         shape = 'HEX'
     elif edges > 7 and edges <11:
         shape = 'CRC'

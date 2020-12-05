@@ -1,4 +1,3 @@
-
 %% bare_conf.tex
 %% V1.4
 %% 2012/12/27
@@ -66,6 +65,7 @@
 \documentclass[conference]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
+%\usepackage{hyperref}
 \usepackage{listings} % For å importere kode
 \usepackage{xcolor} % for å legge farge på koden
 
@@ -135,7 +135,7 @@
 
 % *** CITATION PACKAGES ***
 %
-\usepackage{cite}
+%\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of IEEE. Loading the cite package will
@@ -540,7 +540,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
     \subsection{Socket programmering}
         Socket kommunikasjon brukes for å få to noder i et nettverk til å kommunisere med hverandre ved hjelp av meldinger eller pakker. Det kan 
         være et logisk, internt nettverk i en datamaskin, eller et som er fysisk tilkoblet et åpent, ytre nettverk. Det er mulig å sende og motta 
-        slike meldinger nesten hvor som helst så lenge man har en internettforbindelse.
+        slike meldinger nesten hvor som helst så lenge man har en internettforbindelse \cite{teori:socket}.
 
         Nodene defineres som tjener og klient hvor den ene noden (tjeneren) lytter på en bestemt port – den andre (klienten) når ut for å etablere 
         en tilkobling.
@@ -735,8 +735,8 @@ Oppstått et problem som må løses, latex klarer ikke importere et bibliotek i 
 % (used to reserve space for the reference number labels box)
 
 % Referanse listen
-\bibliographystyle{ieeetr}
 \bibliography{Robtek_referanser}
+\bibliographystyle{ieeetr}
 
 % that's all folks
 \end{document}
