@@ -621,7 +621,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
     
 
-    
+\color    
 \section{Resultater}
     Resultatene vi oppnådde under dette prosjektet
     
@@ -637,9 +637,9 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         En kombinasjon av at kameraet ikke var montert vinkelrett på arbeidsområdet og at lyset i rommet var dynamisk endrende, kunne skyggene til 
         objektene noen ganger plukkes opp som egne kanter. Dette resulterte i at en trekant noen ganger ble registrert som en firkant og at sirklene 
         ikke ble detektert i det hele tatt. Dette kunne utbedres noe ved å justere på parametrene for sensitivitet i Python programkoden. På grunn av 
-        at kameraet modellerer virkeligheten med piksler kommer vi ikke unna at en sirkel som ideelt har 0 kanter faktisk får kanter. Med den 
-        oppløsningen vi hadde var 8 kanter registrert som en sirkel. Derfor ble sirkel-problematikken løst ved å tillate rom for avvik slik at antall 
-        kanter for en sirkel kunne være større enn 7, men mindre enn 10. Vi måtte også ha en restriksjon slik at ikke alt på arbeidsområde kunne tolkes 
+        at kameraet modellerer virkeligheten med piksler var det ikke til å komme unna at en sirkel som ideelt har 0 kanter faktisk får kanter. Med dette kameraets
+        oppløsning ble 8 kanter registrert som en sirkel. Sirkel-problematikken er løst ved å tillate rom for avvik slik at antall 
+        kanter for en sirkel kunne være større enn 7, men mindre enn 10. Det måtte også settes en øvre grense slik at ikke alt på arbeidsområde kunne tolkes 
         som en sirkel. 
 
         OpenCV støtter hovedsakelig bare plug and play enheter, noe som skapte problemer for kommunikasjon mellom openCV og kameraet. Det viste seg at 
@@ -676,17 +676,13 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
     
 \section{Konklusjon}
-    Det ble lagt mye tid i undersøkelser rundt det første prosjektet vi satt i gang med, finne riktig bibliotek å bruke, nøkkelkode til choreagraphe, 
-    documentasjon om NAO etc. Vi hadde kommet godt i gang med dette prosjektet da den ble ødelagt. Etter en god idemyldring klarte vi å omstille 
-    oss og fant en oppgave som beholdt samme grunntanke. Dette ga oss en myk overgang til prosjekt nummer to.
+    Det ble lagt mye tid i undersøkelser rundt det første prosjektet som ble igangsatt: finne riktig bibliotek, nøkkelkode til Choreagraphe, 
+    documentasjon om NAO osv. Prosjektet var kommet godt i gang da roboten ble ødelagt. Etter en god idemyldring var det mulig å omstille 
+    seg og finne en oppgave som beholdt samme grunntanke. Dette ga en myk overgang til prosjekt nummer to.
 
-    OpenCV viste seg å være et meget godt verktøy å bruke når man er ny i bildeprosessering og kunstig intelligens. I emnet ELVE3610 har vi lært 
-    å lage funksjoner i Python, samt bli kjent med hvordan funksjoner ser ut. Dette gjorde at det ble enklere for oss å tolke funksjonene i OpenCV 
-    biblioteket og hvordan utnytte disse. Hadde vi hatt mere tid kunne vi faktisk ha trent vår egen maskinlærings modell til å kjenne igjen de 
-    geometriske figurene i steden for å bruke kantdeteksjon, kanskje til og med laget egenspesifiserte figurer den kjente igjen. 
+    OpenCV viste seg å være et meget godt verktøy å bruke for nykommere i bildeprosessering og kunstig intelligens. Emnet \textit{ELVE3610 Robotteknikk} har gitt innføring i å lage funksjoner i Python, samt bli kjent med hvordan funksjoner ser ut. Dette ga en bedre forutsetning til å tolke funksjonene i OpenCV-biblioteket og vite hvordan å utnytte disse. Hadde prosjektperioden vært lenger eller  hadde det vært mulig å trene en egen maskinlærings modell til å kjenne igjen de geometriske figurene i steden for å bruke kantdeteksjon, kanskje til og med laget egenspesifiserte figurer den kjente igjen. 
 
-    En av laboratorieoppgavene vi hadde i kurset innebar å bruke socket programmering som et kommunikasjonsledd mellom RAPID i RobotStudio og et 
-    Python-script. Dette konseptet ble godt implementert i vårt prosjekt og gjorde det mulig å kombinere KI med ABB-robotarmen. 
+    En av laboratorieoppgavene i kurset innebar å bruke socket programmering som et kommunikasjonsledd mellom roboten og en ekstern datamaskin ved hjelp av funksjoner i RAPID (RobotStudio) og et Python-script. Dette konseptet ble godt implementert i prosjektet og gjorde det mulig å kombinere KI med ABB-robotarmen. 
 
     I arbeidet med programmeringen i RobotStudio satt vi på mye god kunnskap som var opparbeidet gjennom lab-oppgavene i faget. Likevel gikk det 
     mye tid til å sette sammen programmodulene og få programmet til å kommunisere på en god måte med Python-scriptet. Ved testing viste seg at den 
