@@ -1,9 +1,2 @@
-Prosjekt rapport/RobTek_rapport.pdf
-Prosjekt rapport/RobTek_rapport.synctex.gz
-Prosjekt rapport/RobTek_rapport.aux
-Prosjekt rapport/RobTek_rapport.fdb_latexmk
-Prosjekt rapport/RobTek_rapport.fls
-Prosjekt rapport/RobTek_rapport.log
-Prosjekt rapport/RobTek_rapport.bbl
-Prosjekt rapport/RobTek_rapport.blg
-Prosjekt rapport/RobTek_rapport.out
+!RobTek_rapport\*.tex
+!RobTek_referanser\*.bib
