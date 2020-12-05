@@ -548,7 +548,13 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         Kommunikasjonsprotokollen som normalt brukes er TCP, hvor man har god kontroll på at meldingene mottas i den formen de ble sendt. Mottakeren 
         kan bekrefte meldingen – og pakker som ikke når frem overføres på nytt av avsender.
         % # TODO: Legg til socket progerammerings bilde
-        \paragraph{Transport Control Protocol (TCP)}
+        \begin{figure}
+            \includegraphics[width = \textwidth]{}
+            \caption{}
+            \label{fig:socket}
+        \end{figure}
+
+        \subsubsection{Transport Control Protocol (TCP)}
             Både tjener og klient etablerer socket. Tjeneren binder socket-en til spesifisert adresse og port, og lytter passivt etter klientens 
             forsøk på tilkobling. Når tjeneren aksepterer en innkommende forespørsel om tilkobling gjøres et treveis håndtrykk for å bekrefte at 
             kommunikasjonen er etablert. Meldinger kan så sendes fritt mellom nodene. Klientens socket lukkes ofte etter utført operasjon, slik at 
@@ -564,6 +570,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
     firkant, sirkel og sekskant. For enkelheten sin skyld ble benevnelsen forkortet til respektive TRI, SQR, CRC og HEX for videre kommunikasjon 
     med robotarmen. 
     % # TODO: Legg til utstyrsliste i appendiks
+    
     For utstyrsliste se appendiks. 
     
     \subsection{ABB-robotarm}
