@@ -6,8 +6,8 @@ from math import floor
 
 def stackImages(scale,imgArray):
     '''
-    Denne funksjonen legger bilder lagvis på hverandre. Det er nyttig
-    hvis man vil se live hvordan programmet håndterer det den ser. 
+    Denne funksjonen legger bilder lagvis paa hverandre. Det er nyttig
+    hvis man vil se live hvordan programmet handterer det den ser. 
     Brukes med cv2.imshow()
     '''
     rows = len(imgArray)
@@ -44,9 +44,9 @@ def stackImages(scale,imgArray):
 def getContours(imgContour, img):
     '''
     Denne funksjonen identifiserer hvilken geometrisk figurer bilde har
-    ved å telle antall kanter den ser samt hvor mange figurer det finnes i bilde. 
-    Det blir også kalkulert senterpunktet til figurene. Dette blir tegnet på bilde
-    hvis man vil se hva funksjonen gjør visuelt.
+    ved aa telle antall kanter den ser samt hvor mange figurer det finnes i bilde. 
+    Det blir ogsaa kalkulert senterpunktet til figurene. Dette blir tegnet paa bilde
+    hvis man vil se hva funksjonen gjoer visuelt.
     Funksjonen returnerer antall kanter til figuren nederst til venstre og 
     koordinatene til senterpunktet.
     '''
@@ -103,7 +103,7 @@ def pixel2metric(pixel):
 def ObjectAnalysis(edges, centerPoint):
     '''
     Tar i mot antall kanter som er identifisert samt piksel 
-    koordinatene til senterpunktet. Tallene blir så konvert til 
+    koordinatene til senterpunktet. Tallene blir saa konvert til 
     string og det blir returnert figur identificasjon, x og y 
     koordinater til senterpunktet som en string. 
     Eksempel melding: SQRX050Y233
@@ -136,7 +136,7 @@ def imageProcess():
     '''
     Denne funksjonen tar et bilde fra videokameraet idet funksjonen
     blir kalt. Deretter bestemme hvilke figurer som er i bilde
-    velge figuren som er nederst til venstre. Så kalkulerer den 
+    velge figuren som er nederst til venstre. Saa kalkulerer den 
     sentrum av figuren og tilslutt sender tilbake en string med 
     figur type samt x og y koordinater til sentrum  
     '''

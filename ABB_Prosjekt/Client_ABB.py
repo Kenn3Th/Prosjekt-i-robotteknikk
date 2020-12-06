@@ -21,7 +21,7 @@ encoding = 'utf-8' # Definerer hvilket bibliotek den skal bruke for tolking av b
 
 client.connect((HOST_IP,port)) # Socket oppkobling
 
-print(f"Fått tilgang til {HOST_IP}") # Verifiserer at den har tilgang til verten
+print(f"Gained access to {HOST_IP}") # Verifiserer at den har tilgang til verten
     
 while True: 
     data = client.recv(1024) #Definerer at vi kan motta 1024bit.
