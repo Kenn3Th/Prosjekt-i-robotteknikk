@@ -66,7 +66,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
 \usepackage{csquotes} % For å legge på språkspesifikke anførselstegn. I teksten brukes \enquote{text}
-\usepackage{tikz}      %for å bruke tikz
+\usepackage{tikz}     %for å bruke tikz
 \usepackage{amsmath} % For å bruke formler
 %\usepackage{hyperref}
 \usepackage{varioref}
@@ -585,19 +585,19 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
             Vinkel \,\alpha = tan^{-1}\frac{a}{b}
         \end{equation*}
         og er vist i figur \ref{fig:robotstudio}
+
+        \begin[width = .8\linewidth, !htb]{figure}
+            \begin{tikzpicture}
+                % \draw[style=help lines] (0,0) grid (3,2);
+                \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
+                \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
+                \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
+            \end{tikzpicture}
+            \caption{}
+        \end{figure}
         \begin{figure}[!htb]
             \centering
-            %\begin{minipage}
-            %    \begin{tikzpicture}
-                    % \draw[style=help lines] (0,0) grid (3,2);
-            %        \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
-            %        \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
-            %        \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
-            %    \end{tikzpicture}
-            %\end{minipage}
-            %\begin{minipage}
-                \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
-            %\end{minipage}
+            \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
             \caption{Arbeidsområde definert i forhold til bildeutsnitt brukt i OpenCV}
             \label{fig:robotstudio}
         \end{figure}
