@@ -368,32 +368,26 @@
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 % Do not put math or special symbols in the title.
-\title{Objektgjenkjenning med ABB}
-
+\title{Objektgjenkjenning og sortering med robotarm}
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Kenneth R. Eikrehagen}
-\IEEEauthorblockA{Oslo Metropolitan University\\Electrical Engineering\\
-Norway, 3048 Drammen\\
-Email: s331475@oslomet.no}
-\and
-\IEEEauthorblockN{Lars-Erik Ulvund}
-\IEEEauthorblockA{Oslo Metropolitan University\\Electrical Engineering\\
-Norway, 0357 Oslo\\
-Email: s331432@oslomet.no}
-\and
-\IEEEauthorblockN{Alexsander Kristensen}
-\IEEEauthorblockA{Oslo Metropolitan University\\Electrical Engineering\\
-Norway, 0160 oslo\\
-Email: s331477@oslomet.no}
-\and
-\and
-\IEEEauthorblockN{Erik Johansson}
-\IEEEauthorblockA{Oslo Metropolitan University\\Electrical Engineering\\
-Norway, 0160 Oslo\\
-Email: s330317@oslomet.no}}
+% |-- En forfatterblokk --|
+\author{\IEEEauthorblockN{Kenneth R. Eikrehagen $\cdot$ Lars-Erik Ulvund, \\ Alexsander Kristensen $\cdot$ Erik Johansson}
+\IEEEauthorblockA{\textit{Institutt for maskin, elektronikk og kjemi} \\ OsloMet – storbyuniversitetet \\ Oslo, Norge\\ s331475@oslomet.no $\cdot$ s331432@oslomet.no \\ s331477@oslomet.no $\cdot$ s330317@oslomet.no}}
+% |-- Flere forfatterblokker --|
+% \author{\IEEEauthorblockN{Kenneth R. Eikrehagen}
+% \IEEEauthorblockA{\textit{ Institutt for maskin, elektronikk og kjemi } \\ OsloMet – storbyuniversitetet \\ Oslo, Norge \\ s331475@oslomet.no}
+% \and
+% \IEEEauthorblockN{Lars-Erik Ulvund}
+% \IEEEauthorblockA{\textit{ Institutt for maskin, elektronikk og kjemi } \\ OsloMet – storbyuniversitetet \\ Oslo, Norge \\ s331432@oslomet.no}
+% \and
+% \IEEEauthorblockN{Alexsander Kristensen}
+% \IEEEauthorblockA{\textit{Institutt for maskin, elektronikk og kjemi} \\ OsloMet – storbyuniversitetet \\ Oslo, Norge \\ s331477@oslomet.no}
+% \and
+% \IEEEauthorblockN{Erik Johansson}
+% \IEEEauthorblockA{\textit{Institutt for maskin, elektronikk og kjemi} \\ OsloMet – storbyuniversitetet \\ Oslo, Norge \\ s330317@oslomet.no}}
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -412,7 +406,7 @@ Email: s330317@oslomet.no}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-    Denne prosjektoppgaven inneholder nesten to prosjekter da roboten som ble brukt til første prosjektet ble ødelagt etter to uker. 
+    Denne prosjektoppgaven inneholder nesten to prosjekter da roboten som ble brukt til første prosjektet ble ødelagt etter to uker.
     Gruppen ble godt kjent med NAO sitt brukergrensesnitt gjennom dens egne programmerings verktøy “Choreographe” og Aldebran sitt 
     naoqi-bibliotek i Python 2.7. NAO roboten ble programmert til å finne og gå mot en rød ball før den ble ødelagt. 
 
@@ -451,7 +445,7 @@ ble dessverre NAO-roboten diagnostisert til å være defekt, og prosjektet mått
 Ny prosjektoppgave beholdt omtrent samme fokus. Kombinasjonen KI og robotteknikk med kommunikasjon gjennom et IP-nettverk. En god måte å implementere 
 dette var ved å kombinere et kamera, socket programmering over Transmission Control Protocol  (TCP) og en industriell robotarm fra ABB.
  
-\hfill Desember 07, 2020
+\hfill 7. desember 2020
 
     \subsection{NAO prosjekt}
         I dette prosjektet skulle NAO roboten undersøke syns-området sitt etter en ball, gå bort til denne ballen, plukke opp ballen og kaste 
@@ -512,7 +506,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \begin{figure}
             \centering
             \includegraphics[width=.8\linewidth]{images/socket_flytskjema.png}
-            \caption{Flytskjema som viser hvordan socet programmering med TCP fungerer}
+            \caption{Flytskjema som viser hvordan socket programmering med TCP fungerer}
             \label{fig:socket}
         \end{figure}
         \subsubsection{Transport Control Protocol (TCP)}
@@ -561,20 +555,22 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \begin{equation*}
             Vinkel \,\alpha = tan^{-1}\frac{a}{b}
         \end{equation*}
-        og er vist i figur \ref{fig:robotstudio}
+        og er vist i figur \ref{fig:robotstudio} og \ref{fig:arbeidsområde}
         \begin{figure}[!htb]
             \centering
-            \begin{minipage}
-                \begin{tikzpicture}
-                    % \draw[style=help lines] (0,0) grid (3,2);
-                    \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
-                    \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
-                    \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
-                \end{tikzpicture}
-            \end{minipage}
-            \begin{minipage}
+            \begin{tikzpicture}
+                % \draw[style=help lines] (0,0) grid (3,2);
+                \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:87:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
+                \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
+                \draw[rotate around={-3:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
+            \end{tikzpicture}
+            \caption{}
+            \label{fig:arbeidsområde}
+        \end{figure}
+        
+        \begin{figure}[!htb]
+            \centering
                 \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
-            \end{minipage}
             \caption{Arbeidsområde definert i forhold til bildeutsnitt brukt i OpenCV}
             \label{fig:robotstudio}
         \end{figure}
@@ -599,12 +595,12 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{resultat:robotarm}
     \end{figure}
 
-    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulatet:objekt} på neste side.
+    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulat:objekt}.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/objektene.png}
         \caption{Denne figuren viser hvordan vårt program detekterer og gjenkjenner figurene som er i kameraet}
-        \label{resulatet:objekt}
+        \label{resulat:objekt}
     \end{figure}
 
     
