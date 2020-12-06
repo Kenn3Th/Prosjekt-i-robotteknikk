@@ -547,7 +547,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{fig:metode}
     \end{figure}
 
-    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode}. OpenCV og 
+    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode} på neste side. OpenCV og 
     Python-programmering er benyttet for gjennomføring av objektgjenkjenning. ABB-robotarm med sugekopp-verktøy er anvendt for den fysiske 
     sorteringen av figurene. Hvordan robotarmen skulle oppføre seg ble programmert gjennom RAPID i RobotStudio. For å etablere kommunikasjon 
     mellom Python og RobotStudio over internett måtte det benyttes socket programmering.
@@ -555,9 +555,8 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
     Algoritmen som ble konstruert ble testet med at robotarmen skulle sortere 4 forskjellige geometriske figurer. Figurene bestod av trekant, 
     firkant, sirkel og sekskant. For enkelheten sin skyld ble benevnelsen forkortet til respektive TRI, SQR, CRC og HEX for videre kommunikasjon 
     med robotarmen. 
-    % # TODO: Legg til utstyrsliste i appendiks
     
-    For utstyrsliste se appendiks. 
+    For utstyrsliste se tillegg seksjon B tabell \ref{app:soft} og \ref{app:hard}. 
     
     \subsection{ABB-robotarm}
         Til å sortere de ulike geometriske figurene er det benyttet en ABB-robotarm, og programmet som kjøres på FlexPendant er skrevet i RAPID. 
@@ -595,9 +594,14 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         langs øvre kant og Y-aksen nedover langs bildets venstre kant.
 
         Løsningen som ble valgt var å lage et workobject i RobotStudio som tilsvarer arbeidsområdet til kameraet. Arbeidsområdets vinkel i forhold til 
-        arbeidsbordet ble justert ved hjelp av en trigonometrisk funksjon, vinkel $A = tan^{-1}\frac{b}{a}$.
+        arbeidsbordet ble justert ved hjelp av en trigonometrisk funksjon, vinkel $A = tan^{-1}\frac{b}{a}$, og er vist i figur \ref{fig:robotstudio}.
 
-        % # TODO: Sett inn bilde ra RobotStudio
+        \begin{figure}[!htb]
+            \centering
+            \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
+            \caption{Arbeidsområde definert i forhold til bildeutsnitt brukt i OpenCV}
+            \label{fig:robotstudio}
+        \end{figure}
 
         Siden kameraet er montert i taket oppfatter den figurene kun i 2D. Det vil si at kameraet ikke kan detektere høydene på figurene som vises i 
         arbeidsområdet. Høyden på de forskjellige figurene må derfor pre defineres for hver figur. 
@@ -614,6 +618,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
         
 \section{Resultater}
+    Robotarmen brukte et sugekoppverktøy til å løfte de geometriske figurene under sortering som vist i figur \ref{resultat:robotarm}.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/robotarm1.png}
@@ -621,6 +626,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{resultat:robotarm}
     \end{figure}
 
+    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulatet:objekt} på neste side.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/objektene.png}
