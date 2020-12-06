@@ -66,6 +66,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
 %\usepackage{hyperref}
+\usepackage{varioref}
 \usepackage{listings} % For å importere kode
 \usepackage{xcolor} % for å legge farge på koden
 
@@ -462,8 +463,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         Dessverre ble roboten diagnostisert til å være defekt to uker inn i prosjektperioden. På dette tidspunktet var første utfordring unnagjort, 
         og en løsning til neste steg var under utarbeidelse. Mye tid gikk med for å finne kilder til hvordan å kunne programmere roboten med Python 2.7 
         og brukergrensesnittet til Python-NAO-biblioteket (naoqi). Biblioteket naoqi hadde mange gode funksjoner som kunne brukes i prosjektet, med 
-        større fokus på robotteknikk enn KI algoritmer. Koden som ble produsert under dette prosjektet finner man i (referer til appendiks)
-        % # TODO: Legg til appendix
+        større fokus på robotteknikk enn KI algoritmer. Koden som ble produsert under dette prosjektet finner man i tillegg seksjon A.
 
     \subsection{ABB prosjekt}
     ABB-robotarmen på ARIS-lab er utrustet med et sugekopp-verktøy, og det er montert et kamera rett over robotarmen. Problemstillingen å bruke 
@@ -526,9 +526,13 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         en tilkobling.
 
         Kommunikasjonsprotokollen som normalt brukes er TCP, hvor man har god kontroll på at meldingene mottas i den formen de ble sendt. Mottakeren 
-        kan bekrefte meldingen – og pakker som ikke når frem overføres på nytt av avsender.
-        % # TODO: Legg til socket progerammerings bilde
-
+        kan bekrefte meldingen – og pakker som ikke når frem overføres på nytt av avsender, dette blir godt illustrert på figur \ref{fig:socket}.
+        \begin{figure}
+            \centering
+            \includegraphics[width=.8\linewidth]{images/socket_flytskjema.png}
+            \caption{Flytskjema som viser hvordan socet programmering med TCP fungerer}
+            \label{fig:socket}
+        \end{figure}
         \subsubsection{Transport Control Protocol (TCP)}
             Både tjener og klient etablerer socket. Tjeneren binder socket-en til spesifisert adresse og port, og lytter passivt etter klientens 
             forsøk på tilkobling. Når tjeneren aksepterer en innkommende forespørsel om tilkobling gjøres et treveis håndtrykk for å bekrefte at 
@@ -536,7 +540,14 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
             tjeneren kan gå tilbake til passiv lyttemodus, men dette avhenger litt av hensikt og applikasjon.
     
 \section{Metode}
-    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer. OpenCV og 
+    \begin{figure}
+        \centering
+        \includegraphics[width=.8\linewidth]{images/robotarm.png}
+        \caption{Robotarmen som ble brukt sammen med figurene den skulle sortere}
+        \label{fig:metode}
+    \end{figure}
+
+    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode}. OpenCV og 
     Python-programmering er benyttet for gjennomføring av objektgjenkjenning. ABB-robotarm med sugekopp-verktøy er anvendt for den fysiske 
     sorteringen av figurene. Hvordan robotarmen skulle oppføre seg ble programmert gjennom RAPID i RobotStudio. For å etablere kommunikasjon 
     mellom Python og RobotStudio over internett måtte det benyttes socket programmering.
@@ -603,7 +614,20 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
         
 \section{Resultater}
-    Resultatene vi oppnådde under dette prosjektet
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=.8\linewidth]{images/robotarm1.png}
+        \caption{Her er et bilde av robotarmen som starter å sortere figurene}
+        \label{resultat:robotarm}
+    \end{figure}
+
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=.8\linewidth]{images/objektene.png}
+        \caption{Denne figuren viser hvordan vårt program detekterer og gjenkjenner figurene som er i kameraet}
+        \label{resulatet:objekt}
+    \end{figure}
+
     
 \section{Diskusjon}
     \subsection{Simulering og test i RobotStudio}
@@ -700,6 +724,5 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 \newpage
 \appendix
 \input{Tillegg}
-
 % that's all folks
 \end{document}
