@@ -527,13 +527,12 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{fig:metode}
     \end{figure}
 
-    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode}. OpenCV og Python-programmering er benyttet for gjennomføring av objektgjenkjenning. ABB-robotarm med sugekopp-verktøy er anvendt for den fysiske sorteringen av figurene. Hvordan robotarmen skulle oppføre seg ble programmert gjennom RAPID i RobotStudio. For å etablere kommunikasjon mellom Python og RobotStudio over internett måtte det benyttes socket programmering.
+    I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode} på neste side. OpenCV og  Python-programmering er benyttet for gjennomføring av objektgjenkjenning. ABB-robotarm med sugekopp-verktøy er anvendt for den fysiske sorteringen av figurene. Hvordan robotarmen skulle oppføre seg ble programmert gjennom RAPID i RobotStudio. For å etablere kommunikasjon mellom Python og RobotStudio over internett måtte det benyttes socket programmering.
 
     Algoritmen som ble konstruert ble testet med at robotarmen skulle sortere 4 forskjellige geometriske figurer. Figurene bestod av trekant, firkant, sirkel og sekskant. For enkelheten sin skyld ble benevnelsen forkortet til respektive TRI, SQR, CRC og HEX for videre kommunikasjon 
     med robotarmen. 
-    % # TODO: Legg til utstyrsliste i appendiks
     
-    For utstyrsliste se appendiks. 
+    For utstyrsliste se tillegg seksjon B tabell \ref{app:soft} og \ref{app:hard}. 
     
     \subsection{ABB-robotarm}
         Til å sortere de ulike geometriske figurene er det benyttet en ABB-robotarm, og programmet som kjøres på FlexPendant er skrevet i RAPID. 
@@ -562,15 +561,23 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \begin{equation*}
             Vinkel \,\alpha = tan^{-1}\frac{a}{b}
         \end{equation*}
-
-        \begin{center}
-            \begin{tikzpicture}
-                % \draw[style=help lines] (0,0) grid (3,2);
-                \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
-                \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
-                \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
-            \end{tikzpicture}
-        \end{center}
+        og er vist i figur \ref{fig:robotstudio}
+        \begin{figure}[!htb]
+            \centering
+            \begin{minipage}
+                \begin{tikzpicture}
+                    % \draw[style=help lines] (0,0) grid (3,2);
+                    \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
+                    \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
+                    \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
+                \end{tikzpicture}
+            \end{minipage}
+            \begin{minipage}
+                \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
+            \end{minipage}
+            \caption{Arbeidsområde definert i forhold til bildeutsnitt brukt i OpenCV}
+            \label{fig:robotstudio}
+        \end{figure}
 
         % # TODO: Sett inn bilde fra RobotStudio og figur for å vise bruk av funksjon
 
@@ -584,6 +591,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
         
 \section{Resultater}
+    Robotarmen brukte et sugekoppverktøy til å løfte de geometriske figurene under sortering som vist i figur \ref{resultat:robotarm}.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/robotarm1.png}
@@ -591,6 +599,7 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{resultat:robotarm}
     \end{figure}
 
+    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulatet:objekt} på neste side.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/objektene.png}
