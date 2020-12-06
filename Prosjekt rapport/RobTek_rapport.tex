@@ -66,6 +66,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
 \usepackage{csquotes} % For å legge på språkspesifikke anførselstegn. I teksten brukes \enquote{text}
+\usepackage{tikz}     %for å bruke tikz
 \usepackage{amsmath} % For å bruke formler
 %\usepackage{hyperref}
 \usepackage{varioref}
@@ -406,15 +407,16 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-    Denne prosjektoppgaven inneholder nesten to prosjekter da roboten som ble brukt til første prosjektet ble ødelagt etter to uker.
-    Gruppen ble godt kjent med NAO sitt brukergrensesnitt gjennom dens egne programmerings verktøy “Choreographe” og Aldebran sitt 
+    Denne prosjektoppgaven inneholder nesten to prosjekter da roboten som ble brukt til første prosjektet ble ødelagt etter to uker. 
+    Gruppen ble godt kjent med NAO sitt brukergrensesnitt gjennom dens egne programmeringsverktøy \textit{Choreographe} og Aldebran sitt 
     naoqi-bibliotek i Python 2.7. NAO roboten ble programmert til å finne og gå mot en rød ball før den ble ødelagt. 
 
-    Det endelige prosjektet har ved bruk av en industriell robotarm fra ABB og objektgjenkjenning utarbeidet en løsning som sorterer 
-    geometriske figurer etter fasong. For å få til dette er det benyttet Python programmering med bruk av OpenCV som henter video fra 
-    et kamera som er festet i taket over robotarmen. Socket programming er brukt som kommunikasjonsledd mellom Python og RobotStudio til 
-    å sende informasjon om figurtype og dens posisjon. Dette gjorde det mulig for robotarmen å plukke opp figuren og sortere den til 
-    korrekt endestasjon. 
+    I det endelige prosjektet er det brukt en industriell robotarm fra ABB og objekgjenkjenning. 
+    Det ble utarbeidet en løsning som sorterer geometriske figurer etter fasong. For å få til dette 
+    er det benyttet Python programmering med bruk av OpenCV som henter video fra et kamera som er 
+    festet i taket over robotarmen. Socket programming er brukt som kommunikasjonsledd mellom Python 
+    og RobotStudio til å sende informasjon om figurtype og dens posisjon. Dette gjorde det mulig for 
+    robotarmen å plukke opp den riktige figuren og sortere den til korrekt endestasjon. 
 \end{abstract}
 
 % no keywords
@@ -440,69 +442,88 @@ Dette prosjektet har blitt inspirert av hvordan kunstig intelligens (KI), tingen
 samt hvordan dette kan fortsette å påvirke denne industrien. På leting etter et prosjekt som kunne passe til dette stakk NAO roboten som hører
 til i laboratoriet for Automatisering, Robotikk og Intelligente Systemer (ARIS-lab) seg frem som et godt utgangspunkt. NAO er konstruert for å 
 skape forståelse om hvordan KI kan brukes i sammenheng med robotteknikk der internett blir brukt som kommunikasjonskanal. To uker inn i prosjektet 
-ble dessverre NAO-roboten diagnostisert til å være defekt, og prosjektet måtte omstilles for å løse en annen oppgave.  
+ble NAO-roboten ødelagt og prosjektplanen måtte endres. 
 
-Ny prosjektoppgave beholdt omtrent samme fokus. Kombinasjonen KI og robotteknikk med kommunikasjon gjennom et IP-nettverk. En god måte å implementere 
-dette var ved å kombinere et kamera, socket programmering over Transmission Control Protocol  (TCP) og en industriell robotarm fra ABB.
+Kjerneideen fra ovennevnte prosjekt ble tatt med videre inn i nytt prosjekt. Dette ved bruk av kombinasjonen KI og robotteknikk med kommunikasjon 
+gjennom et Internett Protokoll nettverk (IP-nettverk). Det ble vurdert at en god måte å implementere dette var ved å kombinere et kamera, socket 
+programmering over Transmission Control Protocol  (TCP) og en industriell robotarm fra ABB.
  
 \hfill 7. desember 2020
 
     \subsection{NAO prosjekt}
-        I dette prosjektet skulle NAO roboten undersøke syns-området sitt etter en ball, gå bort til denne ballen, plukke opp ballen og kaste 
-        den. Hvis tiden hadde tillatt det skulle den også respondere på stemmekommando. 
+    I dette prosjektet skulle NAO roboten undersøke synsfeltet sitt etter en ball. Deretter gå bort til ballen for så å plukke den opp og kaste den. 
+    Det var også ønskelig at NAO roboten skulle respondere på stemmekommando. 
 
         Prosjektets tre utfordringer:
         \begin{enumerate}
-            \item NAO skulle kjenne igjen ballen og gå bort til den
+            \item Detektere en ball deretter gå bort til den 
             \item Plukke opp ballen og kaste den
             \item Reagere på stemmekommando 
         \end{enumerate}
         
-        Dessverre ble roboten diagnostisert til å være defekt to uker inn i prosjektperioden. På dette tidspunktet var første utfordring unnagjort, 
+        Dessverre ble roboten ødelagt to uker inn i prosjektperioden. På dette tidspunktet var første utfordring unnagjort, 
         og en løsning til neste steg var under utarbeidelse. Mye tid gikk med for å finne kilder til hvordan å kunne programmere roboten med Python 2.7 
         og brukergrensesnittet til Python-NAO-biblioteket (naoqi). Biblioteket naoqi hadde mange gode funksjoner som kunne brukes i prosjektet, med 
         større fokus på robotteknikk enn KI algoritmer. Koden som ble produsert under dette prosjektet finner man i Tillegg seksjon A.
 
     \subsection{ABB prosjekt}
-    ABB-robotarmen på ARIS-lab er utrustet med et sugekopp-verktøy, og det er montert et kamera rett over robotarmen. Problemstillingen å bruke objektgjenkjenning sammen med robotarmen til å sortere forskjellige geometriske figurer ble raskt unnfanget. De viktigste utfordringene identifisert med dette prosjektet var:
+        ABB-robotarmen på ARIS-lab ble utrustet med et sugekopp-verktøy, og det er montert et kamera rett over robotarmen. Problemstillingen å bruke 
+        objektgjenkjenning sammen med robotarmen til å sortere forskjellige geometriske figurer ble raskt unnfanget. De viktigste utfordringene identifisert 
+        med dette prosjektet var:
         \begin{enumerate}
             \item Finne en måte å bruke dataen fra kameraet i taket
             \item Detektere og finne forskjellige geometriske figurer
             \item Få robotarmen til å bevege seg til riktig figur
         \end{enumerate}
-        Videre undersøkelser viste at den beste løsningen var å bruke Python 3.8 (heretter referert til som Python) sammen med OpenCV-biblioteket til å anvende kameraet i taket for objektgjenkjenning. Programvaremessig er Python og RobotStudio brukt for å bevege robotarm; med socket programmering som kommunikasjonsledd. De geometriske figurene som ble brukt for å teste algoritmen var trekant, firkant, sekskant og sirkel.
+        Videre undersøkelser viste at den beste løsningen var å bruke Python 3.8 (heretter referert til som Python) sammen med OpenCV-biblioteket til å 
+        anvende kameraet i taket for objektgjenkjenning. Programvaremessig er Python og RobotStudio brukt for å bevege robotarm ved bruk av socket programmering 
+        som kommunikasjonsledd. De geometriske figurene som ble brukt for å teste algoritmen var trekant, firkant, sekskant og sirkel.
 
 \section{Teori}
 
     \subsection{NAO robot}
-        Aldebaran Robotics har laget en liten “humanoid robot” kalt NAO som er designet for å samhandle med mennesker. Den kan gå, danse, snakke og kjenne igjen fjes, stemme og objekt. Denne roboten har nå kommet til sjette generasjon og blir brukt i undervisning, forskning og helsevesen \cite{teori:NAO}. Den har 25 grader av frihet, 7 berøringssensorer, 4 retningsbestemte mikrofoner og høyttalere, stemmegjenkjenning, 2 2D kameraer og en åpen og fullt programmerbar plattform \cite{teori:SBNAO}.
+        Aldebaran Robotics har laget en liten \textit{humanoid robot} kalt NAO som er designet for å samhandle med mennesker. Denne kan gå, danse og snakke. I tillegg 
+        kan den gjenkjenne ansikt, stemmer og objekter. Denne roboten har nå kommet til sjette generasjon og blir brukt i undervisning, forskning og helsevesen \cite{teori:NAO}. 
+        Den har 25 grader av frihet, syv berøringssensorer, fire retningsbestemte mikrofoner og høyttalere, stemmegjenkjenning, to 2D kameraer og en åpen 
+        og fullt programmerbar plattform \cite{teori:SBNAO}.
 
     \subsection{Objektgjenkjenning}
         Objektgjenkjenning er en datateknologi som benytter datasyn og bildebehandling for å oppdage objekter av en bestemt klasse, f.eks. mennesker, biler eller sykler i digitale bilder og videoer. For å gjenkjenne objekter benyttes det maskinlæring. 
 
         \subsubsection{Maskinlæring}
             Prosessen med å bruke matematiske datamodeller til å hjelpe en datamaskin med å lære uten direkte instruksjon kalles maskinlæring (ML) \cite{teori:ML}. 
-            Dette kan være “enklere” tilnærming som baserer seg på forhåndsdefinerte egenskaper eller “kjennetegn” som sier noe om hva det letes etter og hvordan det skal finnes, hvor dataen etterpå blir klassifisert ved å bruke f.eks. SVM (Support Vector Machine).
+            Dette kan være en enklere tilnærming som baserer seg på forhåndsdefinerte egenskaper eller kjennetegn som sier noe om hva det letes etter 
+            og hvordan det skal finnes, hvor dataen etterpå blir klassifisert ved å bruke f.eks. Support Vector Machine (SVM).
 
     \subsection{OpenCV}
     Et programvarebibliotek som ofte blir brukt for konstruksjon av kildekode for maskinlæring og datamaskinsyn er OpenCV.  Biblioteket er utviklet for å tilby en felles infrastruktur for datasynapplikasjoner og for å akselerere bruken av maskinoppfattelse i kommersielle produkter. OpenCV sitt grensesnitt inkluderer C++, Python, Java og MATLAB og inneholder over 2500 algoritmer innenfor maskinlæring og datasyn \cite{teori:OpenCV}. 
 
-    \subsection{ABB robot arm}
-        ABB robotarm IRB 140 er en relativ liten, men kraftig robotarm som jobber med seks akser. Robotarmen har en rekkevidde på 810mm til  akse fem og en løftekapasitet på maks 6 kg. Det finnes nesten ingen begrensninger for hvor mange forskjellige verktøy som kan monteres på enden av robotarmen, deriblant en sugekopp. Basen til robotarmen kan monteres enten til bakken/underlaget, i taket eller til veggen, noe som gjør robotarmen veldig allsidig \cite{teori:ABB}. 
+    \subsection{ABB robotarm}
+        ABB robotarm IRB 140 er en relativ liten, men kraftig robotarm som jobber med seks akser. Robotarmen har en rekkevidde på 810mm til 
+        akse fem og en løftekapasitet på maks seks kg. Det finnes nesten ingen begrensninger for hvor mange forskjellige verktøy som kan monteres 
+        på enden av robotarmen, deriblant en sugekopp. Basen til robotarmen kan monteres enten til bakken/underlaget, i taket eller til veggen, 
+        noe som gjør robotarmen veldig allsidig \cite{teori:ABB}. 
 
     \subsubsection{Robotstudio}
-        Robotarmen styres av programmer som er laget i ABB sitt program RobotStudio. Programmet overføres til en såkalt FlexPendant, som er koblet til og styrer robotarmen. RobotStudio har en innebygget funksjons som gjør det mulig å simulere ønsket program før det testes på den fysiske roboten.
+        Robotarmen styres av programmer som er laget i ABB sitt program RobotStudio. Programmet overføres til en såkalt FlexPendant, som er 
+        koblet til og styrer robotarmen. RobotStudio har en innebygget funksjon som gjør det mulig å simulere ønsket program før det testes 
+        på den fysiske roboten.
 
-        I RobotStudio er det mulig å modellere gjenstander, figurer og workobjects. En løsning som gjør at simuleringer i programmet enkelt kan gjenspeile virkeligheten. Selve programmet skrives i RAPID, et høynivå programmeringsspråk utviklet for ABB sine industrielle roboter. 
-        Programmet bygges opp av flere moduler for å oppnå god struktur. RAPID har en rekke interne biblioteker og funksjoner som gjør prosessen med å konstruere forskjellige programmer relativ enkel \cite{teori:RobStud} \cite{teori:RobStud1}. 
+        I RobotStudio er det mulig å modellere gjenstander, figurer og workobjects. En løsning som gjør at simuleringer i programmet enkelt kan 
+        gjenspeile virkeligheten. Selve programmet skrives i RAPID, et programmeringsspråk utviklet for ABB sine industrielle roboter. 
+        Programmet bygges opp av flere moduler for å oppnå god struktur. RAPID har en rekke interne biblioteker og funksjoner som gjør prosessen 
+        med å konstruere forskjellige programmer relativ enkel \cite{teori:RobStud} \cite{teori:RobStud1}. 
 
     \subsection{Socket programmering}
-        Socket kommunikasjon brukes for å få to noder i et nettverk til å kommunisere med hverandre ved hjelp av meldinger eller pakker. Det kan være et logisk, internt nettverk i en datamaskin, eller et som er fysisk tilkoblet et åpent, ytre nettverk. Det er mulig å sende og motta slike meldinger nesten hvor som helst så lenge man har en internettforbindelse \cite{teori:socket}.
+        Socket kommunikasjon brukes for å få to noder i et nettverk til å kommunisere med hverandre ved hjelp av meldinger eller pakker.Det kan være 
+        et logisk og internt nettverk i en datamaskin. Alternativt et som er fysisk tilkoblet et åpent ytre nettverk. Det er mulig å sende og motta 
+        slike meldinger nesten hvor som helst så lenge man har en internettforbindelse \cite{teori:socket}.
 
-        Nodene defineres som tjener og klient hvor den ene noden (tjeneren) lytter på en bestemt port – den andre (klienten) når ut for å etablere en tilkobling.
+        Nodene defineres som tjener og klient hvor den ene noden (tjeneren) lytter på en bestemt port mens den andre (klienten) søkes ut for å etablere 
+        en tilkobling.
 
         Kommunikasjonsprotokollen som normalt brukes er TCP, hvor man har god kontroll på at meldingene mottas i den formen de ble sendt. Mottakeren 
-        kan bekrefte meldingen – og pakker som ikke når frem overføres på nytt av avsender, dette blir godt illustrert på figur \ref{fig:socket}.
+        kan bekrefte meldingen og pakker som ikke når frem overføres på nytt av avsender, dette blir godt illustrert på figur \ref{fig:socket}.
         \begin{figure}
             \centering
             \includegraphics[width=.8\linewidth]{images/socket_flytskjema.png}
@@ -510,8 +531,10 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
             \label{fig:socket}
         \end{figure}
         \subsubsection{Transport Control Protocol (TCP)}
-            Både tjener og klient etablerer socket. Tjeneren binder socket-en til spesifisert adresse og port, og lytter passivt etter klientens forsøk på tilkobling. Når tjeneren aksepterer en innkommende forespørsel om tilkobling gjøres et treveis håndtrykk for å bekrefte at kommunikasjonen er etablert. 
-            Meldinger kan så sendes fritt mellom nodene. Klientens socket lukkes ofte etter utført operasjon, slik at tjeneren kan gå tilbake til passiv lyttemodus, men dette avhenger litt av hensikt og applikasjon.
+            Både tjener og klient etablerer socket. Tjeneren binder socketen til spesifisert adresse og port, og lytter passivt etter klientens 
+            forsøk på tilkobling. Når tjeneren aksepterer en innkommende forespørsel om tilkobling gjøres et treveis håndtrykk for å bekrefte at 
+            kommunikasjonen er etablert. Meldinger kan så sendes fritt mellom nodene. Klientens socket lukkes ofte etter utført operasjon, slik at 
+            tjeneren kan gå tilbake til passiv lyttemodus, men dette avhenger litt av hensikt og applikasjon.
     
 \section{Metode}
     \begin{figure}
@@ -551,32 +574,30 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         For at ABB robotarmen skulle plukke opp figurene var det viktig å synkronisere arbeidsområdet til kameraet med arbeidsområdet til robotarmen. 
         Kameraet var montert slik at på videoen som ble vist var hjørnet oppe til venstre for kameraet tilsvarende hjørnet nede til høyre for basen til robotarmen. Programmet som ble laget i Python sendte koordinater med utgangspunkt fra hjørnet oppe til venstre. Der X-aksen strakk seg langs øvre kant og Y-aksen nedover langs bildets venstre kant.
 
-        Løsningen som ble valgt var å lage et workobject i RobotStudio som tilsvarer arbeidsområdet til kameraet. Arbeidsområdets vinkel i forhold til arbeidsbordet ble justert ved hjelp av en trigonometrisk funksjon:
-        \begin{equation*}
-            Vinkel \,\alpha = tan^{-1}\frac{a}{b}
-        \end{equation*}
-        og er vist i figur \ref{fig:robotstudio} og \ref{fig:arbeidsområde}
-        \begin{figure}[!htb]
-            \centering
-            \begin{tikzpicture}
-                % \draw[style=help lines] (0,0) grid (3,2);
-                \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:87:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
-                \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
-                \draw[rotate around={-3:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
-            \end{tikzpicture}
-            \caption{}
-            \label{fig:arbeidsområde}
-        \end{figure}
-        
-        \begin{figure}[!htb]
+       \begin{figure}[!htb]
             \centering
                 \includegraphics[width=.8\linewidth]{images/Arbeidsområde.png}
             \caption{Arbeidsområde definert i forhold til bildeutsnitt brukt i OpenCV}
             \label{fig:robotstudio}
         \end{figure}
 
-        % # TODO: Sett inn bilde fra RobotStudio og figur for å vise bruk av funksjon
+        Løsningen som ble valgt var å lage et workobject i RobotStudio som tilsvarer arbeidsområdet til kameraet som vist i figur \ref{fig:robotstudio}. Arbeidsområdets vinkel i forhold til arbeidsbordet ble justert ved hjelp av en trigonometrisk funksjon:
+        \begin{equation*}
+            \text{Vinkel } \alpha = tan^{-1}\frac{a}{b}
+        \end{equation*}
+        og er vist i figur \ref{fig:trig}
 
+        \begin{figure}[!htb]
+            \begin{tikzpicture}
+                % \draw[style=help lines] (0,0) grid (3,2);
+                \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
+                \draw[gray] (0,0) -- node[left] {b} (0,10/3) node[above right=-2.5pt] {a} -- (5,10/3) -- (5,0) -- (0,0);
+                \draw[rotate around={-5:(0,0)}] (0,0) -- node[right] {c} (0,10/3) -- (5,10/3) -- (5,0) -- (0,0);
+            \end{tikzpicture}
+            \caption{Hvordan man finner vinkel $\alpha$ mellom to plan}
+            \label{fig:trig}
+        \end{figure}
+    
         Siden kameraet er montert i taket oppfatter den figurene kun i 2D. Det vil si at kameraet ikke kan detektere høydene på figurene som vises i arbeidsområdet. Høyden på de forskjellige figurene må derfor pre defineres for hver figur. 
 
         For å unngå at de sorterte geometriske figurene ikke skulle forveksles som figurer som skulle sorteres. Ble “endestasjonene” satt til å være utenfor synsfeltet til kameraet.
@@ -587,7 +608,8 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
 
         
 \section{Resultater}
-    Robotarmen brukte et sugekoppverktøy til å løfte de geometriske figurene under sortering som vist i figur \ref{resultat:robotarm}.
+    Robotarmen brukte et sugekoppverktøy til å løfte de geometriske figurene under sortering som vist i figur \ref{resultat:robotarm} på neste side. 
+    Figur \ref{resultat:sortering} på neste side illustrer hvordan robotarmen sorterer de geometriske figurene som er tilfeldig plassert i arbeidsområdet dens.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/robotarm1.png}
@@ -595,7 +617,14 @@ dette var ved å kombinere et kamera, socket programmering over Transmission Con
         \label{resultat:robotarm}
     \end{figure}
 
-    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulat:objekt}.
+    \begin{figure}
+        \centering
+        \includegraphics[width = .8\linewidth]{images/sortering.jpg}
+        \caption{Her ser man at robotarmen har sortert figurene til venste, og de resterende figurene i arbeidsområdet er tilfeldig plassert}
+        \label{resultat:sortering}
+    \end{figure}
+
+    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulatet:objekt} på neste side.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/objektene.png}
