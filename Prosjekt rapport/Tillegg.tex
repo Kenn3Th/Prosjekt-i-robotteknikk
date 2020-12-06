@@ -1,5 +1,5 @@
 \section{NAO}
-\subsection{NAO - kode}
+\subsection{NAO-kode}
 NAO snakker og går
 \lstinputlisting[language=Python,firstline=2]{../NAOProsjekt/NAO20.py}
 NAO lokaliserer en rød ball og går til den
@@ -48,8 +48,16 @@ NAO lokaliserer en rød ball og går til den
     \label{app:hard}
 \end{table}
 
-\subsection{ABB - kode}
+\subsection{Python-kode}
 Objektgjenkjenning
 \lstinputlisting[language=Python, firstline=3, lastline=158]{../ABB_Prosjekt/center_contour.py}
-Klient koden
+Kommunikasjon med robot
 \lstinputlisting[language=Python, firstline=3]{../ABB_Prosjekt/Client_ABB.py}
+
+\subsection{RAPID-kode (Utdrag)}
+Kommunikasjon med klient
+\lstinputlisting[style=rapid]{../ABB_Prosjekt/RAPID/Communication.mod}
+Flytting av objekter
+\lstinputlisting[style=rapid]{../ABB_Prosjekt/RAPID/Movement.mod}
+Deklarering av variable- og konstante verdier, samt kjøring av hovedprosedyre
+\lstinputlisting[style=rapid]{../ABB_Prosjekt/RAPID/MainModule.mod}

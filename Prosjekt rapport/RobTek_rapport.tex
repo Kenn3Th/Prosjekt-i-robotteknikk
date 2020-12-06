@@ -66,8 +66,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[norsk]{babel}
 \usepackage{csquotes} % For å legge på språkspesifikke anførselstegn. I teksten brukes \enquote{text}
-\usepackage{tikz}     %for å bruke tikz
-\usepackage{amsmath} % For å bruke formler
 %\usepackage{hyperref}
 \usepackage{varioref}
 \usepackage{listings} % For å importere kode
@@ -76,25 +74,50 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codered}{rgb}{0.53,0,0.08}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+    backgroundcolor = \color{backcolour},   
+    commentstyle = \color{codegreen},
+    keywordstyle = \color{codepurple},
+    keywordstyle = [2]{\color{orange}},
+    numberstyle = \tiny\color{codegray},
+    stringstyle = \color{codered},
+    basicstyle = \ttfamily\footnotesize,
+    breakatwhitespace = false,         
+    breaklines = true,                 
+    captionpos = b,                    
+    keepspaces = true,                 
+    numbers = left,                    
+    numbersep = 5pt,                  
+    showspaces = false,                
+    showstringspaces = false,
+    showtabs = false,                  
+    tabsize = 2
+}
+\lstdefinestyle{rapid}{
+    backgroundcolor = \color{backcolour},   
+    commentstyle = \color{codegreen},
+    morecomment = [l][commentstyle]{!},
+    keywordstyle = \color{blue},
+    keywordstyle = [2]{\color{teal}},
+    keywords = {MODULE,PROC,WHILE,IF,THEN,DO,OR,ELSE,ELSEIF,ENDIF,ENDWHILE,ENDPROC,ENDMODULE, VAR, CONST, RAISE, RETRY},
+    morekeywords = [2]{MoveL, MoveJ, Offs, StrLen, StrPart, StrToVal, SocketAccept, SocketBind, SocketClose, SocketConnect, SocketCreate, SocketListen, SocketReceive, SocketSend, TPWrite, WaitTime, robtarget, num, socketdev, string, ERRNO, ERR_SOCK_CLOSED, ERR_SOCK_TIMEOUT, fine , v100, v1000},
+    numberstyle = \tiny\color{codegray},
+    stringstyle = \color{codered},
+    morestring = [b][stringstyle]",
+    basicstyle = \ttfamily\footnotesize,
+    breakatwhitespace = false,         
+    breaklines = true,                 
+    captionpos = b,                    
+    keepspaces = true,                 
+    numbers = left,                    
+    numbersep = 5pt,                  
+    showspaces = false,                
+    showstringspaces = false,
+    showtabs = false,                  
+    tabsize = 2
 }
 
 \lstset{style=mystyle}
@@ -209,7 +232,7 @@
 
 % *** MATH PACKAGES ***
 %
-%\usepackage[cmex10]{amsmath}
+\usepackage[cmex10]{amsmath}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics. If using
 % it, be sure to load this package with the cmex10 option to ensure that
@@ -401,7 +424,7 @@
 
     I det endelige prosjektet er det brukt en industriell robotarm fra ABB og objekgjenkjenning. 
     Det ble utarbeidet en løsning som sorterer geometriske figurer etter fasong. For å få til dette 
-    er det benyttet Python programmering med bruk av OpenCV som henter video fra et kamera som er 
+    er det benyttet Python programmering med bruk av \textit{OpenCV} som henter video fra et kamera som er 
     festet i taket over robotarmen. Socket programming er brukt som kommunikasjonsledd mellom Python 
     og RobotStudio til å sende informasjon om figurtype og dens posisjon. Dette gjorde det mulig for 
     robotarmen å plukke opp den riktige figuren og sortere den til korrekt endestasjon. 
@@ -439,7 +462,7 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
     \subsection{NAO prosjekt}
     I dette prosjektet skulle NAO roboten undersøke synsfeltet sitt etter en ball. Deretter gå bort til ballen for så å plukke den opp og kaste den. 
     Det var også ønskelig at NAO roboten skulle respondere på stemmekommando. 
-
+\newpage
         Prosjektets tre utfordringer:
         \begin{enumerate}
             \item Detektere en ball deretter gå bort til den 
@@ -484,8 +507,8 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
     \subsection{OpenCV}
     Et programvarebibliotek som ofte blir brukt for konstruksjon av kildekode for maskinlæring og datamaskinsyn er OpenCV.  Biblioteket er utviklet for å tilby en felles infrastruktur for datasynapplikasjoner og for å akselerere bruken av maskinoppfattelse i kommersielle produkter. OpenCV sitt grensesnitt inkluderer C++, Python, Java og MATLAB og inneholder over 2500 algoritmer innenfor maskinlæring og datasyn \cite{teori:OpenCV}. 
 
-    \subsection{ABB robotarm}
-        ABB robotarm IRB 140 er en relativ liten, men kraftig robotarm som jobber med seks akser. Robotarmen har en rekkevidde på 810mm til 
+    \subsection{ABB-robotarm}
+        ABB-robotarm IRB 140 er en relativ liten, men kraftig robotarm som jobber med seks akser. Robotarmen har en rekkevidde på 810mm til 
         akse fem og en løftekapasitet på maks seks kg. Det finnes nesten ingen begrensninger for hvor mange forskjellige verktøy som kan monteres 
         på enden av robotarmen, deriblant en sugekopp. Basen til robotarmen kan monteres enten til bakken/underlaget, i taket eller til veggen, 
         noe som gjør robotarmen veldig allsidig \cite{teori:ABB}. 
@@ -532,32 +555,35 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
 
     I denne prosjektoppgaven er objektgjenkjenning sammen med ABB-robotarmen brukt til å sortere forskjellige geometriske figurer som vist på figur \ref{fig:metode} på neste side. OpenCV og  Python-programmering er benyttet for gjennomføring av objektgjenkjenning. ABB-robotarm med sugekopp-verktøy er anvendt for den fysiske sorteringen av figurene. Hvordan robotarmen skulle oppføre seg ble programmert gjennom RAPID i RobotStudio. For å etablere kommunikasjon mellom Python og RobotStudio over internett måtte det benyttes socket programmering.
 
-    Algoritmen som ble konstruert ble testet med at robotarmen skulle sortere 4 forskjellige geometriske figurer. Figurene bestod av trekant, firkant, sirkel og sekskant. For enkelheten sin skyld ble benevnelsen forkortet til respektive TRI, SQR, CRC og HEX for videre kommunikasjon 
+    Algoritmen som ble konstruert ble testet med at robotarmen skulle sortere fire forskjellige geometriske figurer. Figurene som skulle sorteres var trekant, firkant, sirkel og sekskant. For enkelheten sin skyld ble benevnelsen forkortet til respektive TRI, SQR, CRC og HEX for videre kommunikasjon 
     med robotarmen. 
     
     For utstyrsliste se tillegg seksjon B tabell \ref{app:soft} og \ref{app:hard}. 
     
     \subsection{ABB-robotarm}
-        Til å sortere de ulike geometriske figurene er det benyttet en ABB-robotarm, og programmet som kjøres på FlexPendant er skrevet i RAPID. 
-        Robotarmen ble utstyrt med et sugekopp-verktøy som flyttet de forskjellige figurene fra synsfeltet til kameraet og over til en predefinert 
-        \enquote{endestasjon}. 
+        Til å sortere de ulike geometriske figurene er det benyttet en ABB-robotarm. Programmet som kjøres på FlexPendant er skrevet i RAPID. 
+        
+        Robotarmen ble utstyrt med et sugekopp-verktøy som flyttet de forskjellige figurene fra synsfeltet til kameraet og over til en predefinert endestasjon. 
 
-        For å verifisere arbeidsområdet til robotarmen ble det plasserte et hvit ark på bordet foran robotarmen. Kameraet i taket ble skrudd på og 
-        prosjektert på en pc-skjerm. En firkant figur ble plassert i hvert hjørnene i henhold til hva kameraet kunne detektere og hjørnene ble markert 
-        på det hvite arket.
+        For å verifisere arbeidsområdet til robotarmen ble det plassert et hvit ark på bordet foran robotarmen. Kameraet i taket ble skrudd på og prosjektert på en pc-skjerm.
+        
+        En firkantet figur ble plassert i hvert av hjørnene i henhold til hva kameraet kunne detektere og hjørnene ble markert på det hvite arket.
 
     \subsection{Objektgjenkjenning}
-        OpenCV ble brukt sammen med Python for å kunne fange og prosessere video av ønsket arbeidsområde. For å kommunisere med kamera i taket 
-        var det også nødvendig å installere en ekstern driver \cite{metode:kamera}, da dette kameraet ikke var “plug and play”.
+        OpenCV ble brukt sammen med Python for å kunne fange og prosessere video av ønsket arbeidsområde. For å kommunisere med kamera i taket var det også nødvendig å installere en ekstern driver \cite{metode:kamera}, ettersom kameraet ikke var \textit{plug-and-play}.
 
-        Det som kjennetegner en geometrisk figur er hvor mange kanter den har. OpenCV har en funksjon som kan detektere antall kanter til objekter i bildet. Dette kalles \enquote{edge detection} og er en gren som tilhører objektgjenkjenning. Denne funksjonen utførte først objektlokalisering for å finne figurene, deretter ble det telt opp hvor mange kanter figurene hadde. Antall kanter ble deretter analysert for å kjenne igjen hvilke typer geometriske figurer den så på bildet. Ut ifra dette kunne man også kalkulere senterpunktet til hver figur. De foreløpige verdiene måtte deretter skaleres fra piksel-dimensjon til metriske verdier. Dette ble gjort ved å beregne forholdet mellom høyden i bildet med tilsvarende høyde på arbeidsområdet. I forbindelse med videre kommunikasjon til robotarmen var det nødvendig å etablere et referansepunkt.  Det viste seg at OpenCV analyserte bildet som en matrise ved at den startet i øverste venstre hjørnet, og jobbet seg bortover rad for rad. Referansen for videre kommunikasjon måtte derfor være øverst til venstre i bildet.
+        Det som kjennetegner en geometrisk figur er hvor mange kanter den har. OpenCV har en funksjon som kan detektere antall kanter til objekter i bildet. Dette kalles \textit{edge detection} og er en gren som tilhører objektgjenkjenning. Denne funksjonen utførte først objektlokalisering for å finne figurene, deretter ble det telt opp hvor mange kanter figurene hadde.
+        
+        Antall kanter ble så analysert for å kjenne igjen hvilke typer geometriske figurer den så på bildet. Ut ifra dette kunne man også kalkulere senterpunktet til hver figur. De foreløpige verdiene måtte deretter skaleres fra piksel-dimensjon til metriske verdier. Dette ble gjort ved å beregne forholdet mellom høyden i bildet med tilsvarende høyde på arbeidsområdet.
+        
+        I forbindelse med videre kommunikasjon til robotarmen var det nødvendig å etablere et referansepunkt.  Det viste seg at OpenCV analyserte bildet som en matrise ved at den startet i det øverste venstre hjørnet, og jobbet seg bortover rad for rad. Referansen for videre kommunikasjon måtte derfor være øverst til venstre i bildet.
         % # TODO: Dele opp i flere avsnitt?
 
     \subsection{Socket programmering}
         For å oppnå kommunikasjon mellom Python koden som tok seg av objektgjenkjenningen og RobotStudio som beveger robotarmen ble det benyttet socket programmering. Python programmet ble satt opp til å være en klient, og robotarmen ble konfigurert til å være server. Før dataen kunne sendes videre til robotarmen måtte alle numeriske verdier konverteres til datatypen \textit{string}.  Dette ble gjort i en egendefinert funksjon som tok i mot antall identifiserte kanter, samt piksel koordinater til senter i figurene og returnerte dette som en string. Beskjeden som ble sendt inneholdt benevnelsen av hvilken type figur samt senter koordinatene til figuren.
 
     \subsection{RobotStudio}
-        For at ABB robotarmen skulle plukke opp figurene var det viktig å synkronisere arbeidsområdet til kameraet med arbeidsområdet til robotarmen. 
+        For at ABB-robotarmen skulle plukke opp figurene var det viktig å synkronisere arbeidsområdet til kameraet med arbeidsområdet til robotarmen. 
         Kameraet var montert slik at på videoen som ble vist var hjørnet oppe til venstre for kameraet tilsvarende hjørnet nede til høyre for basen til robotarmen. Programmet som ble laget i Python sendte koordinater med utgangspunkt fra hjørnet oppe til venstre. Der X-aksen strakk seg langs øvre kant og Y-aksen nedover langs bildets venstre kant.
 
        \begin{figure}[!htb]
@@ -574,6 +600,7 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
         og er vist i figur \ref{fig:trig}
 
         \begin{figure}[!htb]
+            \centering
             \begin{tikzpicture}
                 % \draw[style=help lines] (0,0) grid (3,2);
                 \filldraw[fill=orange!20!white, draw=orange] (0,0) -- (0,2.5) arc (90:85:2.5) node[orange,above right=-1pt]{$\alpha$} -- (0,0);
@@ -586,71 +613,76 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
     
         Siden kameraet er montert i taket oppfatter den figurene kun i 2D. Det vil si at kameraet ikke kan detektere høydene på figurene som vises i arbeidsområdet. Høyden på de forskjellige figurene må derfor pre defineres for hver figur. 
 
-        For å unngå at de sorterte geometriske figurene ikke skulle forveksles som figurer som skulle sorteres. Ble “endestasjonene” satt til å være utenfor synsfeltet til kameraet.
+        For å unngå at de sorterte geometriske figurene ikke skulle forveksles som figurer som skulle sorteres ble endestasjonene satt til å være utenfor synsfeltet til kameraet.
 
     \subsection{Figurene}
-        For å vise at prosjektet med objektgjenkjenning kunne kjenne igjen forskjellige geometriske figurer falt valget ned på 4 forskjellig figurer. Hver med forskjellig høyde. En trekant med en høyde på 20 mm, firkant med høyde 15 mm, sekskant med høyde 10 mm og sirkel med høyde 24 mm. 
+        For å vise at prosjektet med objektgjenkjenning kunne kjenne igjen forskjellige geometriske figurer falt valget ned på fire forskjellig figurer. Hver med forskjellig høyde. En trekant med en høyde på 20 mm, firkant med høyde 15 mm, sekskant med høyde 10 mm og sirkel med høyde 24 mm. 
         De geometriske figurene firkant, trekant og sekskant ble tegnet i Tinkercad \cite{metode:tinkercad} og 3D-printet med bruk av PLA. PLA er et termoplastisk materiale som er relativt lufttett. Dette gjør det lettere for sugekopp-verktøyet til robotarmen å plukke opp de geometriske figurene. Sirkelen som er benyttet er en gammel snusboks som er laget av plast. PLA ble valgt fordi det var gratis og tilgjengelig på MakerSpace.
 
         
 \section{Resultater}
-    Robotarmen brukte et sugekoppverktøy til å løfte de geometriske figurene under sortering som vist i figur \ref{resultat:robotarm} på neste side. 
-    Figur \ref{resultat:sortering} på neste side illustrer hvordan robotarmen sorterer de geometriske figurene som er tilfeldig plassert i arbeidsområdet dens.
+    Prosjektet ble en suksess. Robotarmen klarte å sortere objektene som vist i figur \ref{resultat:robotarm}. 
+    Figur \ref{resultat:sortering} illustrerer hvordan robotarmen sorterer objektene som er tilfeldig plassert i arbeidsområdet.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/robotarm1.png}
-        \caption{Her er et bilde av robotarmen som starter å sortere figurene}
+        \caption{Her er et bilde av robotarmen som starter å sortere objektene}
         \label{resultat:robotarm}
     \end{figure}
 
     \begin{figure}
         \centering
         \includegraphics[width = .8\linewidth]{images/sortering.jpg}
-        \caption{Her ser man at robotarmen har sortert figurene til venste, og de resterende figurene i arbeidsområdet er tilfeldig plassert}
+        \caption{Her ser man at robotarmen har sortert objektene til venste, og de resterende objektene i arbeidsområdet er tilfeldig plassert}
         \label{resultat:sortering}
     \end{figure}
 
-    Hvordan programmet vi konstruerte oppfattet det som ble fanget på kameraet ser man på figur \ref{resulatet:objekt} på neste side.
+    Kantdeteksjon med kamera og OpenCV fugerte godt. Resultatet er vist i figur \ref{resulat:objekt}.
     \begin{figure}[!htb]
         \centering
         \includegraphics[width=.8\linewidth]{images/objektene.png}
-        \caption{Denne figuren viser hvordan vårt program detekterer og gjenkjenner figurene som er i kameraet}
+        \caption{Her vises det hvordan programmet detekterer og gjenkjenner objektene som er i kameraet}
         \label{resulat:objekt}
     \end{figure}
 
     
 \section{Diskusjon}
     \subsection{Simulering og test i RobotStudio}
-        Tekststrengen som ble sendt fra Python programmet ble i første omgang kun lest i sin helhet av programmet i robotstudio. Når den ble mottatt av programmet i robotstudio viste seg derimot at det var en utfordring med at Python programmet sendte samme tekststreng gjentatte ganger. Dette førte til at robotarmen prøvde å hente samme figur flere ganger selv om den allerede var flyttet. Løsningen på problemet var å sende tekststrengen inn i en rekke if-setninger. If-setningene sjekket om ny tekststreng var lik den forrige tekststrengen. De sjekket også om x-koordinatene var lik forrige x-koordinat eller om y-koordinatene var lik forrige y-koordinat. Hvis en av tilfellene var sant skulle programmet i RobotStudio se bort i fra denne tekststrengen og vente på neste tekststreng.
+        Tekststrengen som ble sendt fra Python-programmet ble i første omgang kun lest i sin helhet av programmet i RobotStudio. Når den ble mottatt av programmet i RobotStudio viste seg derimot at det var en utfordring med at Python-programmet sendte samme tekststreng gjentatte ganger. Dette førte til at robotarmen prøvde å hente samme figur flere ganger selv om den allerede var flyttet. 
+        
+        Løsningen på problemet var å sende tekststrengen inn i en rekke if-setninger. If-setningene sjekket om ny tekststreng var lik den forrige tekststrengen. De sjekket også om x-koordinatene var lik forrige x-koordinat eller om y-koordinatene var lik forrige y-koordinat. Hvis en av tilfellene var sant skulle programmet i RobotStudio se bort i fra denne tekststrengen og vente på neste tekststreng.
 
-        En kombinasjon av at kameraet ikke var montert vinkelrett på arbeidsområdet og at lyset i rommet var dynamisk endrende, kunne skyggene til objektene noen ganger plukkes opp som egne kanter. Dette resulterte i at en trekant noen ganger ble registrert som en firkant og at sirklene ikke ble detektert i det hele tatt. Dette kunne utbedres noe ved å justere på parametrene for sensitivitet i Python programkoden. På grunn av at kameraet modellerer virkeligheten med piksler var det ikke til å komme unna at en sirkel som ideelt har 0 kanter faktisk får kanter. Med dette kameraets oppløsning ble 8 kanter registrert som en sirkel. Sirkel-problematikken er løst ved å tillate rom for avvik slik at antall kanter for en sirkel kunne være større enn 7, men mindre enn 10. Det måtte også settes en øvre grense slik at ikke alt på arbeidsområde kunne tolkes som en sirkel. 
+        En kombinasjon av at kameraet ikke var montert vinkelrett på arbeidsområdet og at lyset i rommet var dynamisk endrende, kunne skyggene til objektene noen ganger plukkes opp som egne kanter. Dette resulterte i at en trekant noen ganger ble registrert som en firkant og at sirklene ikke ble detektert i det hele tatt. Dette kunne utbedres noe ved å justere på parametrene for sensitivitet i Python programkoden.
+        
+        På grunn av at kameraet modellerer virkeligheten med piksler var det ikke til å komme unna at en sirkel som ideelt ikke har kanter faktisk får kanter. Med dette kameraets oppløsning ble åtte kanter registrert som en sirkel. Sirkel-problematikken er løst ved å tillate rom for avvik slik at antall kanter for en sirkel kunne være større enn syv, men mindre enn ti. Det måtte også settes en øvre grense slik at ikke alt på arbeidsområde kunne tolkes som en sirkel. 
 
-        OpenCV støtter hovedsakelig bare plug and play enheter, noe som skapte problemer for kommunikasjon mellom openCV og kameraet. Det viste seg at kameraet hadde flere sensorer som ble knyttet sammen gjennom kamera driveren og programvaren, noe openCV ikke klarte å gjøre. Synsvinkelen til kameraet ble derfor noe dårligere enn ønsket. Bildet fra kameraet var også speilvendt som gjorde ting vanskelig da openCV behandler dataen med utgangspunkt i det øverste venstre hjørnet. Det var derfor nødvendig å speilvende tilbake bildet før bildeprosesseringen kunne anvendes. 
+        OpenCV støtter hovedsakelig bare plug-and-play enheter, noe som skapte problemer for kommunikasjon mellom OpenCV og kameraet. Det viste seg at kameraet hadde flere sensorer som ble knyttet sammen gjennom kamera driveren og programvaren, noe OpenCV ikke klarte å gjøre. Synsvinkelen til kameraet ble derfor noe dårligere enn ønsket. Bildet fra kameraet var også speilvendt som gjorde ting vanskelig da OpenCV behandler dataen med utgangspunkt i det øverste venstre hjørnet. Det var derfor nødvendig å speilvende tilbake bildet før bildeprosesseringen kunne anvendes.
+
         Speilvendingen av bildet viste seg å være veldig prosesskrevende som resulterte i en treg videostrøm for bildeprosesseringen. En løsning på dette kunne vært å bruke en datamaskin med en kraftigere grafikkprosessor til å håndtere bildeprosesseringen. 
 
-    \subsection{Test med ABB robotarm}
-        Som følge av gjentatte tester med ABB robotarmen viste det seg at Python programmet detekterte selve robotarmen som en figur og prøvde å sortere denne. Det ble derfor nødvendig å legge inn en “pause-posisjon” for robotarmen utenfor synet til kameraet, slik at python programmet kunne hente ny posisjon til neste geometriske figur som skulle sorteres.
+    \subsection{Test med ABB-robotarm}
+        Som følge av gjentatte tester med ABB-robotarmen viste det seg at Python programmet detekterte selve robotarmen som en figur og prøvde å sortere denne. Det ble derfor nødvendig å legge inn en pauseposisjon for robotarmen utenfor synet til kameraet, slik at python programmet kunne hente ny posisjon til neste geometriske figur som skulle sorteres.
 
-        Det viste seg ganske fort at trekant figuren som var laget fungerte dårlig. Den var for liten og ujevn i kantene. Noen ganger ble den registrert som en annen geometrisk figur og robotarmen prøvde å sortere den til en annen \enquote{endestasjon} enn for trekanter. Det viste seg også at størrelsen på trekanten gjorde det vanskelig for sugekoppen å få tak i den. Derfor ble etterhvert trekanten ekskludert fra gjennomføringen av prosjektet. 
+        Det viste seg ganske fort at trekant figuren som var laget fungerte dårlig. Den var for liten og ujevn i kantene. Noen ganger ble den registrert som en annen geometrisk figur og robotarmen prøvde å sortere den til en annen endestasjon enn for trekanter. Det viste seg også at størrelsen på trekanten gjorde det vanskelig for sugekoppen å få tak i den. Derfor ble etterhvert trekanten ekskludert fra gjennomføringen av prosjektet. 
 
-        Mellom hver test i ARIS-laben viste det seg at kameraet i taket hadde flyttet seg litt. Det medførte at arbeidsområdet til ABB robotarmen også hadde flyttet seg. Det var derfor nødvendig med en justering av arbeidsområdet før det var mulig å kjøre programmet. Det hadde vært ønskelig med et kamera som var bedre montert i taket og som står vinkelrett mot basen til robotarmen.
+        Mellom hver test i ARIS-laben viste det seg at kameraet i taket hadde flyttet seg litt. Dette medførte at arbeidsområdet til ABB-robotarmen også hadde flyttet seg. Det var derfor nødvendig med en justering av arbeidsområdet før det var mulig å kjøre programmet. Det hadde vært ønskelig med et kamera som var bedre montert i taket og som står vinkelrett mot basen til robotarmen.
 
-    \subsection{Forslag til forbedring av oppgaven}
+    \subsection{Forslag til forbedring av prosjektet}
         I dette prosjektet ble det brukt et 2D kamera festet i taket over arbeidsområdet. Dette begrenset synsvinkelen til kun å oppfatte hvor objektene lå i xy-planet. Det var dog ikke mulig å oppfatte høyden på objektene. En utbedring på dette kunne blant annet ha vært å montere et ekstra kamera som hadde kunnet oppfatte høyden på objektene slik at høyden ikke hadde måttet forhåndsdefineres. 
 
         For objektgjenkjenning kunne det alternativt blitt trent opp en modell til å gjenkjenne figurene i stedet for å gjenkjenne antall kanter. Dette hadde resultert i en mer nøyaktig bildegjenkjenning hvor flere objekter kunne blitt implementert, men det hadde samtidig krevd flere arbeidstimer noe det ikke var tilstrekkelig mange av i dette prosjektet.  
 
-        For å øke bildefrekvensen kunne det blitt benyttet en kraftigere datamaskin. Dette ville forbedret nøyaktigheten og samtidig fikse mye av problemene som oppstod underveis, f.eks. utfordringen ved at Python programmet sendte samme informasjons-streng flere ganger
+        For å øke bildefrekvensen kunne det blitt benyttet en kraftigere datamaskin. Dette ville forbedret nøyaktigheten og samtidig fikset mange av problemene som oppstod underveis, f.eks. utfordringen ved at Python programmet sendte samme informasjons-streng flere ganger
 
     
 \section{Konklusjon}
-    Det ble lagt mye tid i undersøkelser rundt det første prosjektet som ble igangsatt: finne riktig bibliotek, nøkkelkode til Choreagraphe, dokumentasjon om NAO osv. Prosjektet var kommet godt i gang da roboten ble ødelagt. Etter en god idemyldring var det mulig å omstille seg og finne en oppgave som beholdt samme grunntanke. Dette ga en myk overgang til prosjekt nummer to.
+    Det ble lagt mye tid i undersøkelser rundt det første prosjektet som ble igangsatt: finne riktig bibliotek, nøkkelkode til Choreographe, dokumentasjon om NAO osv. Prosjektet var kommet godt i gang da roboten ble ødelagt. Etter en god idemyldring var det mulig å omstille seg og finne et prosjekt som beholdt samme grunntanke. Dette ga en myk overgang til prosjekt nummer to.
 
-    OpenCV viste seg å være et meget godt verktøy å bruke for nykommere i bildeprosessering og kunstig intelligens. Emnet \textit{ELVE3610 Robotteknikk} har gitt innføring i å lage funksjoner i Python, samt bli kjent med hvordan funksjoner ser ut. Dette ga en bedre forutsetning til å tolke funksjonene i OpenCV-biblioteket og vite hvordan å utnytte disse. Hadde prosjektperioden vært lenger eller  hadde det vært mulig å trene en egen maskinlærings modell til å kjenne igjen de geometriske figurene i steden for å bruke kantdeteksjon, kanskje til og med laget egenspesifiserte figurer den kjente igjen. 
+    OpenCV viste seg å være et meget godt verktøy å bruke for nykommere i bildeprosessering og kunstig intelligens. Emnet \textit{ELVE3610 Robotteknikk} har gitt innføring i å lage funksjoner i Python, samt bli kjent med hvordan funksjoner ser ut. Dette ga en bedre forutsetning til å tolke funksjonene i OpenCV-biblioteket og vite hvordan å utnytte disse. Hadde prosjektperioden vært lenger eller  hadde det vært mulig å trene en egen maskinlæringsmodell til å kjenne igjen de geometriske figurene i steden for å bruke kantdeteksjon, kanskje til og med laget egenspesifiserte figurer den kjente igjen. 
 
-    En av laboratorieoppgavene i kurset innebar å bruke socket programmering som et kommunikasjonsledd mellom roboten og en ekstern datamaskin ved hjelp av funksjoner i RAPID (RobotStudio) og et Python-script. Dette konseptet ble godt implementert i prosjektet og gjorde det mulig å kombinere KI med ABB-robotarmen. 
+    En av laboratorieoppgavene i kurset innebar å bruke socket programmering som et kommunikasjonsledd mellom roboten og en ekstern datamaskin ved hjelp av funksjoner i RAPID (RobotStudio) og et Python-program. Dette konseptet ble godt implementert i prosjektet og gjorde det mulig å kombinere KI med ABB-robotarmen. 
 
-    I arbeidet med programmeringen i RobotStudio satt vi på mye god kunnskap som var opparbeidet gjennom lab-oppgavene i faget. Likevel gikk det mye tid til å sette sammen programmodulene og få programmet til å kommunisere på en god måte med Python-scriptet. Ved testing viste seg at den virtuelle verden og den virkelige verden ikke alltid er lik. Det var derfor nødvendig med noe finjustering. Dette kom spesielt frem når vi skulle synkronisere kameraets arbeidsområde til robotarmens arbeidsområde. 
+    I arbeidet med programmeringen i RobotStudio hadde prosjektgruppen mye god kunnskap som var opparbeidet gjennom laboratorieoppgavene i faget. Likevel gikk det mye tid til å sette sammen programmodulene og få programmet til å kommunisere på en god måte med Python-programmet. Ved testing viste seg at den virtuelle verden og den virkelige verden ikke alltid er lik. Det var derfor nødvendig med noe finjustering. Dette kom spesielt godt frem ved synkronisering av kameraets arbeidsområde til robotarmens arbeidsområde. 
 
 
 % trigger a \newpage just before the given reference
@@ -680,8 +712,9 @@ programmering over Transmission Control Protocol  (TCP) og en industriell robota
 \bibliography{Robtek_referanser}
 \bibliographystyle{ieeetr}
 
+\onecolumn % Make appendices single column
 \newpage
-\appendix
+\appendices
 \input{Tillegg}
 % that's all folks
 \end{document}
